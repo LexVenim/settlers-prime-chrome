@@ -11,6 +11,7 @@ import { SectorComponent }          from './sector/sector.component';
 import { SectorsComponent }         from './sectors/sectors.component';
 
 const routes: Routes = [
+  { path: 'island', component: SectorsComponent },
   { path: 'sectors',  component: SectorsComponent },
   { path: 'sectors/:id', component: SectorComponent },
   { path: 'academy', component: AcademyComponent },

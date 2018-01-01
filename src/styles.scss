@@ -1,0 +1,120 @@
+/* You can add global styles to this file, and also import other style files */
+
+$fa-font-path: "../node_modules/font-awesome/fonts";
+@import "../node_modules/font-awesome/scss/font-awesome.scss";
+
+body {
+  margin: 0;
+}
+
+.container {
+  position: relative;
+  > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* content position */
+
+.left-content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-content {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+/* background colors */
+
+.bc-primary {
+  background-color: whitesmoke;
+}
+
+.bc-secondary, .bc-ternary {
+  background-color: darkgrey;
+}
+
+.bc-above, .bc-positive {
+  background-color: seagreen;
+}
+
+.bc-below, .bc-negative {
+  background-color: firebrick;
+}
+
+/* colors */
+
+.c-primary {
+  color: darkgrey;
+}
+
+.c-secondary {
+  color: whitesmoke;
+}
+
+.c-below, .c-negative, .c-destroy {
+  color: firebrick;
+}
+
+.c-above, .c-positive, .c-upgrade {
+  color: seagreen;
+}
+
+.c-equal, .c-gold {
+  color: gold;
+}
+
+.c-dark {
+  color: blue;
+}
+
+.c-magenta {
+  color: darkmagenta;
+}
+
+/* opacity */
+
+.o-25 {
+  opacity: 0.25;
+}
+
+.o-75 {
+  opacity: 0.75;
+}
+
+.o-90 {
+  opacity: 0.90;
+}
+
+/* wallpapers */
+
+.wall-default {
+  
+}
+
+@font-face {
+  font-family: Breakable;
+  src: url('./assets/Breakable.otf');
+}
+
+
+.loading {
+  height: 310px;
+  width: 300px;
+  font-size: 3em;
+  font-family: Breakable;
+}

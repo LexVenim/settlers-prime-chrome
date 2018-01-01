@@ -1,0 +1,37 @@
+.main {
+  width: 500px;
+  height: 340px;
+  .main-background {
+    opacity: 0.70;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../assets/wallpaper.jpg');
+  }
+  .main-content {
+    height: 310px;
+    overflow: hidden;
+  }
+  .main-header {
+    height: 30px;
+    .main-header-content {
+      display: grid;
+      grid-template-columns: 4fr 1fr 2fr;
+      font-family: Breakable;
+      font-size: 1.25em;
+      .logout {
+        grid-column: 3;
+        > i {
+          margin-right: 1em;
+        }
+      }
+      .menu {
+        border-left: 1px dashed;
+        border-right: 1px dashed;
+      }
+      .title {
+        padding-left: 1em;
+      }
+    }
+  }
+}
