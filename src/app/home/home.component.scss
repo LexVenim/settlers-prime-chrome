@@ -33,6 +33,7 @@
     .content {
       display: grid;
       grid-template-rows: 12fr repeat(4, 5fr);
+      grid-gap: 5px;
       .avatar {
         display: grid;
         grid-template-rows: 7fr 3fr;
@@ -63,6 +64,11 @@
     opacity: 0.8;
     background: repeating-linear-gradient(-45deg, #EC7063, #EB984E 5px, white 5px, white 10px);
     color: #5D6D7E;
+  }
+  .font24 {
+    font-size: 24px;
+  }
+  .font30 {
     font-size: 30px;
   }
 }

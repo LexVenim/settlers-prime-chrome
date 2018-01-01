@@ -19,7 +19,7 @@
 						Profile
 					</div>
 				</div>
-				<div class="authed center-content" *ngIf="!isLoggedIn()">
+				<div class="authed font24 center-content" *ngIf="!isLoggedIn()">
 					Sign In
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 				<div class="side-item side-item-empty center-content">
 					Select Adventure
 				</div>
-				<div class="locked center-content">
+				<div class="locked font24 center-content">
 					Locked
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 				<div class="side-item side-item-empty center-content">
 					Select Guide
 				</div>
-				<div class="locked center-content">
+				<div class="locked font24 center-content">
 					Locked
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 						Event
 					</div>
 				</div>
-				<div class="locked center-content">
+				<div class="locked font24 center-content">
 					Locked
 				</div>
 			</div>
@@ -65,10 +65,10 @@
 					{{item.name}}
 				</div>
 			</div>
-			<div class="locked center-content" *ngIf="item.lock">
+			<div class="locked font30 center-content" *ngIf="item.lock">
 				Locked
 			</div>
-			<div class="authed center-content" *ngIf="!item.lock && item.auth && !isLoggedIn()">
+			<div class="authed font30 center-content" *ngIf="!item.lock && item.auth && !isLoggedIn()">
 				Sign In
 			</div>
 		</div>
