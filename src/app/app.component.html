@@ -17,11 +17,11 @@
         </div>
         <div class="logout center-content" *ngIf="auth.isLoggedIn()" (click)="logout()">
           <i class="fa fa-sign-out"></i>
-          Log Out
+          Sign Out
         </div>
         <div class="logout center-content" *ngIf="!auth.isLoggedIn()" (click)="goTo('login')">
           <i class="fa fa-sign-in"></i>
-          Log In
+          Sign In
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@
 						Profile
 					</div>
 				</div>
-				<div class="authed font24 center-content" *ngIf="!isLoggedIn()">
+				<div class="authed font24 center-content" *ngIf="!isLoggedIn()" (click)="login()">
 					Sign In
 				</div>
 			</div>

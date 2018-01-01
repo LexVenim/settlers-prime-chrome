@@ -51,6 +51,7 @@ import { ProfileModule } 							from './profile/profile.module';
 import { AuthGuard } 							    from './common/auth.guard';
 
 import { HomeComponent }              from './home/home.component';
+import { LoginComponent }             from './login/login.component';
 import { NotFoundComponent }          from './not-found/not-found.component';
 
 @NgModule({
@@ -58,6 +59,7 @@ import { NotFoundComponent }          from './not-found/not-found.component';
     AppComponent,
 
     HomeComponent,
+    LoginComponent,
     NotFoundComponent
   ],
   imports: [
