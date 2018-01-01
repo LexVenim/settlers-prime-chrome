@@ -4,18 +4,23 @@
 		<div class="content">
 			<div class="avatar">
 				<div class="icon center-content">
-					<img src="">
+					<img src="../../assets/icons/king.png">
 				</div>
 				<div class="name center-content">
 					Unknown User
 				</div>
 			</div>
-			<div class="side-item">
-				<div class="icon center-content">
-					<img src="../../assets/icons/king.png">
+			<div class="container">
+				<div class="side-item center-content">
+					<div class="icon center-content">
+						<img src="../../assets/icons/king.png">
+					</div>
+					<div class="name center-content">
+						Profile
+					</div>
 				</div>
-				<div class="name center-content">
-					{{ isLoggedIn() ? "Go to Profile" : "Sign In"}}
+				<div class="authed center-content" *ngIf="!isLoggedIn()">
+					Sign In
 				</div>
 			</div>
 			<div class="container">
