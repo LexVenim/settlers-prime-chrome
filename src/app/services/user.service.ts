@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 interface User {
   avatar?: string
@@ -9,7 +9,7 @@ interface User {
 
 @Injectable()
 export class UserService {
-  private user : User
+  private user : User;
   id
 
   constructor(public db: AngularFireDatabase) {
@@ -25,11 +25,10 @@ export class UserService {
     this.id = id
 
     return new Promise((resolve, reject) => {
-      // this.db.object('/users/' + this.id + '/user').subscribe(snapshot => {
-      //   this.user = snapshot
-      //   resolve()
-      // })
-      resolve()
+      this.db.object<User>('/users/' + this.id + '/user').valueChanges().subscribe(snapshot => {
+        this.user = snapshot
+        resolve()
+      })
     })
   }
 
@@ -40,16 +39,12 @@ export class UserService {
 
   exists(id){
     return new Promise((resolve, reject) => {
-      resolve(false)
-      // this.db.object("/users").$ref.once("value", function(snapshot) {
-
-      //   if(!snapshot.val())
-      //     resolve(false) 
-      //   else 
-      //     this.db.object('/users/' + id).$ref.once("value", function(snapshot) {
-      //       snapshot.val() ? resolve(true) :  resolve(false)
-      //     })
-      // }, this)
+      this.db.object("/users").snapshotChanges().subscribe(snapshot => {
+        if(!snapshot.key)
+          resolve(false) 
+        else 
+          this.db.object('/users/' + id).snapshotChanges().subscribe(snapshot => snapshot.key ? resolve(true) :  resolve(false))
+      })
     });
   }
 
@@ -70,6 +65,6 @@ export class UserService {
   }
 
   name(){
-    return this.user && this.user.name ? this.user.name : "Username"
+    return this.user && this.user.name ? this.user.name : "Unknown User"
   }
 }

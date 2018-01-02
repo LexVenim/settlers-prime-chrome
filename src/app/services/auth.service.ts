@@ -41,7 +41,7 @@ export class AuthService {
     // private settings: SettingsService,
     private us: UserService) 
   {
-    let spVersion = '2.0.7'
+    let spVersion = '2.9.9'
     this.cache.get('settlersprime-version').then(version => {
 
       if(!version || version != spVersion){

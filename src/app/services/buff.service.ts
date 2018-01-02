@@ -43,23 +43,31 @@ export class BuffService {
   }
 
   public loadUser(){
-    // this.db.list('/users/' + this.user.id + '/buffs').$ref.on("child_added", function(snapshot) {
-    //   let data = snapshot.val()
-    //   if(this.checkTime(data.endtime)){
-    //     let i = this.buffs.findIndex(b => b.code == data.code)
-    //     this.buffs[i].list.push({building: snapshot.key, endtime: data.endtime})
-    //     this.bs.setModifier(data.building, snapshot.key, this.buffs[i].x)
-    //   }
-    //   else
-    //     this.remove(snapshot.key)
-    // }, this)
-    
-    // this.db.object('/users/' + this.user.id + '/buffs').$ref.on('child_removed', function(snapshot){
-    //   let data = snapshot.val()
-    //   let i = this.buffs.findIndex(b => b.code == data.code)
-    //   this.buffs[i].list = this.buffs[i].list.filter(b => b.building != snapshot.key)
-    //   this.bs.removeModifier(data.building, snapshot.key, this.buffs[i].x)
-    // }, this)
+    this.db.list('/users/' + this.user.id + '/buffs').stateChanges().subscribe(event => {
+      let data = event.payload.val()
+      let i
+
+      switch (event.type) {
+        case "child_added":
+          if(this.checkTime(data.endtime)){
+            i = this.buffs.findIndex(b => b.code == data.code)
+            this.buffs[i].list.push({building: event.payload.key, endtime: data.endtime})
+            this.bs.setModifier(data.building, event.payload.key, this.buffs[i].x)
+          }
+          else
+            this.remove(event.payload.key)
+          break;
+        
+        case "child_removed":
+          i = this.buffs.findIndex(b => b.code == data.code)
+          this.buffs[i].list = this.buffs[i].list.filter(b => b.building != event.payload.key)
+          this.bs.removeModifier(data.building, event.payload.key, this.buffs[i].x)
+          break;   
+        
+        default:
+          break;
+        }
+      })
   }
 
   public clearUser(){

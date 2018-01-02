@@ -54,36 +54,43 @@ export class BuildingService {
   }
 
   public loadUser(){
-    // this.db.list('/users/' + this.user.id + '/buildings').$ref.on("child_added", function(snapshot) {
-    //   let data = snapshot.val()
-    //   this.formatBuilding(snapshot.key, data).then(b => {
-    //     let bti = this.buildings.findIndex(bt => bt.code == data.code)
-    //     this.buildings[bti].list.push(b)
-    //     this.buildings[bti].sectorList[data.scode] ? this.buildings[bti].sectorList[data.scode] += 1 : this.buildings[bti].sectorList[data.scode] = 1
-    //     this.buildingsSubject.next(b)
-    //   })
-    // }, this)
+    this.db.list('/users/' + this.user.id + '/buildings').stateChanges().subscribe(event => {
+      let data = event.payload.val()
+      let bti, i
 
-    // this.db.object('/users/' + this.user.id + '/buildings').$ref.on('child_changed', function(snapshot){ 
-    //   let data = snapshot.val()
-    //   let bti = this.buildings.findIndex(bt => bt.code == data.code)
-    //   let i = this.buildings[bti].list.findIndex(b => b.id == snapshot.key)
-    //   this.formatBuilding(snapshot.key, data).then(b => {
-    //     this.buildings[bti].list[i] = b
-    //     this.buildingsSubject.next(b)
-    //   })
-    // }, this)
-    
-    // this.db.object('/users/' + this.user.id + '/buildings').$ref.on('child_removed', function(snapshot){
-    //   let data = snapshot.val()
-    //   let bti = this.buildings.findIndex(bt => bt.code == data.code)
-    //   let i = this.buildings[bti].list.findIndex(b => b.id == snapshot.key)
+      switch (event.type) {
+        case "child_added":
+          this.formatBuilding(event.payload.key, data).then(b => {
+            bti = this.buildings.findIndex(bt => bt.code == data.code)
+            this.buildings[bti].list.push(b)
+            this.buildings[bti].sectorList[data.scode] ? this.buildings[bti].sectorList[data.scode] += 1 : this.buildings[bti].sectorList[data.scode] = 1
+            this.buildingsSubject.next(b)
+          })
+          break;
 
-    //   if(this.buildings[bti].sectorList[data.scode] > 0)
-    //     this.buildings[bti].sectorList[data.scode] -= 1
+        case "child_changed":
+          bti = this.buildings.findIndex(bt => bt.code == data.code)
+          i = this.buildings[bti].list.findIndex(b => b.id == event.payload.key)
+          this.formatBuilding(event.payload.key, data).then(b => {
+            this.buildings[bti].list[i] = b
+            this.buildingsSubject.next(b)
+          })
+          break;
+        
+        case "child_removed":
+          bti = this.buildings.findIndex(bt => bt.code == data.code)
+          i = this.buildings[bti].list.findIndex(b => b.id == event.payload.key)
 
-    //   this.buildingsSubject.next(this.buildings[bti].list.splice(i, 1))
-    // }, this)
+          if(this.buildings[bti].sectorList[data.scode] > 0)
+            this.buildings[bti].sectorList[data.scode] -= 1
+
+          this.buildingsSubject.next(this.buildings[bti].list.splice(i, 1))
+          break;
+               
+        default:
+          break;
+        }
+      })
   }
 
   private formatBuilding(id, data){

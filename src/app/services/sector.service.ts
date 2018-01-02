@@ -109,19 +109,27 @@ export class SectorService {
   }
 
   public loadUser(){
-    // this.db.list('/users/' + this.user.id + '/sectors').$ref.on("child_added", function(snapshot) {
-    //   let data = snapshot.val()
-    //   let i = this.sectors.findIndex(s => s.code == snapshot.key)
-    //   this.sectors[i].camps = data.camps
-    //   this.sectors[i].locked = data.locked
-    // }, this)
+    this.db.list('/users/' + this.user.id + '/sectors').stateChanges().subscribe(event => {
+      let data = event.payload.val()
+      let i
 
-    // this.db.object('/users/' + this.user.id + '/sectors').$ref.on('child_changed', function(snapshot){ 
-    //   let data = snapshot.val()
-    //   let i = this.sectors.findIndex(s => s.code == snapshot.key)
-    //   this.sectors[i].camps = data.camps
-    //   this.sectors[i].locked = data.locked
-    // }, this)
+      switch (event.type) {
+        case "child_added":
+          i = this.sectors.findIndex(s => s.code == event.payload.key)
+          this.sectors[i].camps = data.camps
+          this.sectors[i].locked = data.locked
+          break;
+
+        case "child_changed":
+          i = this.sectors.findIndex(s => s.code == event.payload.key)
+          this.sectors[i].camps = data.camps
+          this.sectors[i].locked = data.locked
+          break;
+        
+        default:
+          break;
+        }
+      })
   }
 
   public clearUser(){

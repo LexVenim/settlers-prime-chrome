@@ -1,3 +1,32 @@
-<p>
-  login works!
-</p>
+<div class="login container c-primary o-75" *ngIf="!progress.message">
+	<div class="bc-primary"></div>
+	<div>
+		<div class="login-header center-content">Sign In</div>
+		<form #loginForm="ngForm">
+			<input type="text" name="email" ngModel reqired placeholder="Email" />
+			<input type="password" name="password" ngModel required placeholder="Password" />
+			<div class="login-sign center-content">
+				<div class="sign-btn center-content c-positive" (click)="login(loginForm)">
+					<i class="fa fa-sign-in"></i>
+					Sign In
+				</div>
+			</div>
+			<div class="login-help center-content" *ngIf="registered" (click)="forgot(loginForm)">
+				Forget password?
+			</div>
+		</form>
+		<div class="login-separator center-content">or</div>
+		<div class="login-google center-content">
+			<div class="google-btn center-content" (click)="loginGoogle()">
+				<i class="fa fa-google"></i>
+				Sign In with Google
+			</div>
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>

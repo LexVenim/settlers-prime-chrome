@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ProgressService } from '../services/progress.service';
 import { RoutingService } from '../services/routing.service';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-home',
@@ -28,7 +30,8 @@ export class HomeComponent implements OnInit {
   constructor(public progress: ProgressService,
 
     private af: AuthService,
-    private router: RoutingService) { }
+    private router: RoutingService,
+    private user: UserService) { }
 
   ngOnInit() { }
 

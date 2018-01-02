@@ -26,11 +26,10 @@ export class SettingsService {
 
   public load(){
     return new Promise((resolve, reject) => {
-      // this.settingsRef = this.db.list('/users/' + this.user.id + '/settings').subscribe(snapshot => {
-      //   this.settings = snapshot
-      //   resolve()
-      // });
-      resolve()
+      this.settingsRef = this.db.list('/users/' + this.user.id + '/settings').valueChanges().subscribe(snapshot => {
+        this.settings = snapshot
+        resolve()
+      });
     })
   }
 
