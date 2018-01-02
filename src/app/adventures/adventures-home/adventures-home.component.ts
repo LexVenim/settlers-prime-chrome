@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild  } from '@angular/core';
 
 import { BackendService, Adventure } from '../../services/backend/backend.service';
 import { CacheService } from '../../services/cache.service';

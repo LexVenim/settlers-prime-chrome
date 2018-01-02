@@ -1,16 +1,4 @@
 <div class="adventures" *ngIf="!progress.message">
-	<div class="container header header-top center-content c-primary">
-			<div class="background bc-primary o-75"></div>
-			<div class="content">
-				<div class="icon center-content">
-					<img src="../../assets/icons/ship.png">
-				</div>
-				<div class="name center-content">
-					Adventures
-				</div>
-			</div>
-		</div>
-
 	<div *ngFor="let category of ads.adventures">
 		<div class="container header center-content c-secondary">
 			<div class="background bc-secondary o-75"></div>
@@ -47,3 +35,5 @@
 		{{progress.message}}
 	</div>
 </div>
+
+<script> Scrollbar.initAll(); </script>
