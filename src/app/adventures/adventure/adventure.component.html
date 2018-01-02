@@ -1,52 +1,119 @@
 <div class="adventure" *ngIf="!progress.message">
-	<div class="adventure-header container">
-		<div class="item-background bc-primary o-75"></div>
-		<div class="adventure-header-content c-primary">
-			<div class="adventure-header-top">
-				<div class="center-content">
+	<div class="side-menu">
+		<div class="avatar container">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
 					<img src="{{ads.adventure.icon}}">
 				</div>
-				<div class="center-content">
+				<div class="name center-content">
 					{{ads.adventure.name}}
 				</div>
 			</div>
-			<div class="adventure-header-bottom">
-				<div class="center-content">
+		</div>
+
+		<div class="side-item container">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
 					<img src="../../assets/icons/star.png">
-					{{ads.adventure.info.level}}
 				</div>
-				<div class="center-content">
-					<img src="../../assets/icons/group.png">
-					{{ads.adventure.info.players}}
-				</div>
-				<div class="center-content">
-				<img src="../../assets/icons/hourglass.png">
-					{{ads.adventure.info.time}}
+				<div class="text center-content">			
+					Level {{ads.adventure.info.level}}+
 				</div>
 			</div>
-			<div class="adventure-header-bottom">
-				<div class="center-content">
-				<img src="../../assets/icons/medal.png">
-					{{ads.adventure.info.xp}}
+		</div>
+
+		<div class="side-item container">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
+					<img src="../../assets/icons/medal.png">
 				</div>
-				<div class="center-content">
+				<div class="text center-content">
+					{{ads.adventure.info.xp}} XP
+				</div>
+			</div>
+		</div>
+
+		<div class="side-item container">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
+					<img src="../../assets/icons/hourglass.png">
+				</div>
+				<div class="text center-content">
+					{{ads.adventure.info.time}} {{ads.adventure.info.time > 1 ? "hours" : "hour"}}
+				</div>
+			</div>
+		</div>
+
+		<div class="side-item container">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
 					<img src="../../assets/icons/difficulty.png">
-					{{ads.adventure.info.difficulty}}
+				</div>
+				<div class="text center-content">			
+					Difficulty: {{ads.adventure.info.difficulty}}
+				</div>
+			</div>
+		</div>
+
+		<div class="side-item container">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
+					<img src="../../assets/icons/group.png">
+				</div>
+				<div class="text center-content">			
+					{{ads.adventure.info.players}} {{ads.adventure.info.players > 1 ? "players" : "player"}}
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="adventure-content">
-		<div *ngFor="let item of menu">
-			<div class="container item center-content c-secondary" (click)="goTo(item.page)">
-				<div class="item-background bc-secondary o-75"></div>
-				<div class="item-content">
-					<div class="item-icon center-content">
-						<img src="{{item.icon}}">
+
+	<div class="info">
+		<div class="map container center-content">
+			<div>
+				<img src="{{ads.adventure.info.map}}">
+			</div>
+		</div>
+		<div class="buttons">
+			<div class="choice-btn container" (click)="goTo('camps')">
+				<div class="background bc-primary o-75"></div>
+				<div class="content c-primary">
+					<div class="icon center-content">
+						<img src="../../assets/icons/tent.png">
 					</div>
-					<div class="item-name center-content">
-						{{item.name}}
+					<div class="text center-content">			
+						Camps
 					</div>
+				</div>
+			</div>
+			<div class="choice-btn container" (click)="goTo('guides')">
+				<div class="background bc-primary o-75"></div>
+				<div class="content c-primary">
+					<div class="icon center-content">
+						<img src="../../assets/icons/guide.png">
+					</div>
+					<div class="text center-content">			
+						Guides
+					</div>
+				</div>
+			</div>
+			<div class="choice-btn container">
+				<div class="background bc-primary o-75"></div>
+				<div class="content c-primary">
+					<div class="icon center-content">
+						<img src="../../assets/icons/scroll.png">
+					</div>
+					<div class="text center-content">			
+						Quests
+					</div>
+				</div>
+				<div class="locked font30 center-content">
+					Locked
 				</div>
 			</div>
 		</div>

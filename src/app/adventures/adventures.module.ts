@@ -4,6 +4,7 @@ import { FormsModule }              from '@angular/forms';
  
 import { AdventureComponent }           from './adventure/adventure.component';
 import { AdventuresHomeComponent }      from './adventures-home/adventures-home.component';
+import { CampsComponent }               from './camps/camps.component';
 import { GuidesComponent }              from './guides/guides.component';
 import { GuideComponent }               from './guide/guide.component';
 
@@ -21,8 +22,9 @@ import { AdventuresRoutesModule }       from './adventures.routes';
   declarations: [
     AdventureComponent,
     AdventuresHomeComponent,
+    CampsComponent,
     GuidesComponent,
-    GuideComponent
+    GuideComponent    
   ],
   providers: [ AdventuresService ]
 })

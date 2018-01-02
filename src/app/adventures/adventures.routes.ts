@@ -3,12 +3,14 @@ import { RouterModule, Routes } 		from '@angular/router';
  
 import { AdventureComponent }           from './adventure/adventure.component';
 import { AdventuresHomeComponent }      from './adventures-home/adventures-home.component';
+import { CampsComponent }               from './camps/camps.component';
 import { GuidesComponent }              from './guides/guides.component';
 import { GuideComponent }               from './guide/guide.component';
 
 const routes: Routes = [
   { path: 'adventures',  component: AdventuresHomeComponent },
   { path: 'adventures/:id', component: AdventureComponent },
+  { path: 'adventures/:id/camps', component: CampsComponent },
   { path: 'adventures/:id/guides', component: GuidesComponent },
   { path: 'adventures/:id/guides/:gid', component: GuideComponent }
 ];

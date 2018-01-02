@@ -35,7 +35,6 @@ export class AdventureComponent implements OnInit {
   }
 
   goTo(page){
-  	this.router.go(page)
+  	this.router.go(["adventures", this.params.id, page])
   }
-
 }

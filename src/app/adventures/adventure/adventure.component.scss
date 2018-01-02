@@ -1,57 +1,80 @@
 .adventure {
-  height: 310px;
-  overflow: hidden;
+  height: 97%;
+  width: 98%;
+  margin: 1%;
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  grid-gap: 5px;
   font-family: Breakable;
-  .adventure-header {
-    height: 124px;
-    .adventure-header-content {
+
+  .info {
+    display: grid;
+    grid-template-rows: 5fr 2fr;
+    grid-gap: 5px;
+    .buttons {
       display: grid;
-      grid-row-gap: 5px;
-      > div {
-        border-bottom: 2px dashed;
-      }
-      .adventure-header-bottom {
-        height: 30px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        font-size: 18px;
-        img {
-          height: 20px;
-          margin-right: 5px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 5px;
+      .choice-btn {
+        > div {
+          border-radius: 5px;
         }
-      }
-      .adventure-header-top {
-        height: 50px;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        font-size: 20px;
-        img {
-          height: 50px;
+        .content {
+          display: grid;
+          grid-template-rows: 7fr 3fr;
+          .icon img {
+            height: 30px;
+          }
+          .text {
+            font-size: 25px;
+          }
         }
       }
     }
+    .map img {
+      max-width: 100%;
+      // transition: all 0.3s;
+    }
+    // .map:hover img {
+    //   transform: scale(3);
+    // }
   }
-  .item {
-    height: 40px;
-    width: 100%;
-    margin: 10px 0;
+  
+  .side-menu {
+    display: grid;
+    grid-template-rows: 20fr repeat(5, 5fr);
+    grid-gap: 5px;
     > div {
-      width: 250px;
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 10px;
+      border-radius: 5px;
     }
-    &:hover > div {
-      width: 275px;
-    }
-    .item-content {
-      display: grid;
-      grid-template-columns: 2fr 5fr;
-      .item-icon img {
-        height: 35px;
+    .avatar {
+      .content {
+        display: grid;
+        grid-template-rows: 7fr 3fr;
+        .icon img {
+          height: 70px;
+        }
+        .name {
+          font-size: 20px;
+        }
       }
-      .item-name {
-        font-size: 20px;
+    }
+    .side-item {
+      .content {
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+        border-top: 1px dotted;
+        .icon img {
+          height: 20px;
+        }
+        .text {
+          font-size: 16px;
+        }
       }
     }
   }
+}
+
+.font30 {
+  font-size: 30px;
 }
