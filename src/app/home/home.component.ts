@@ -15,10 +15,10 @@ export class HomeComponent implements OnInit {
 
 	menu : any = [
     {page: "battle", icon: "../../assets/icons/swords.png", name: "Battle"},
-    {page: "economy", icon: "../../assets/icons/mill.png", name: "Economy"},
+    {page: "economy", icon: "../../assets/icons/mill.png", name: "Economy", lock: true},
     {page: "trade", icon: "../../assets/icons/coins.png", name: "Trade", lock: true},
 
-    {page: "island", icon: "../../assets/icons/castle.png", name: "Island", auth: true},
+    {page: "island", icon: "../../assets/icons/castle.png", name: "Island", auth: true, lock: true},
     {page: "adventures", icon: "../../assets/icons/ship.png", name: "Adventures"},
     {page: "quests", icon: "../../assets/icons/scroll.png", name: "Quests", lock: true},
 

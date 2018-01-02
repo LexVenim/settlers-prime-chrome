@@ -23,7 +23,7 @@ import { AsyncHttpManager } from './services/backend/async_http.manager';
 
 import { AdventureService } from './services/adventure.service';
 import { AuthService } from './services/auth.service';
-// import { BattleService } from './services/battle.service';
+import { BattleService } from './services/battle.service';
 import { BuffService } from './services/buff.service';
 import { BuildingService } from './services/building.service';
 import { CacheService } from './services/cache.service';
@@ -43,6 +43,7 @@ import { UserService } from './services/user.service';
 // Routing
 
 import { AppRoutesModule } 						from './app.routes';
+import { AdventuresModule }           from './adventures/adventures.module';
 import { BattleModule } 							from './battle/battle.module';
 import { EconomyModule } 							from './economy/economy.module';
 import { IslandModule } 							from './island/island.module';
@@ -71,6 +72,7 @@ import { NotFoundComponent }          from './not-found/not-found.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
 
+    AdventuresModule,
     BattleModule,
     EconomyModule,
     IslandModule,
@@ -82,7 +84,7 @@ import { NotFoundComponent }          from './not-found/not-found.component';
     AuthGuard, 
     AdventureService,
     AuthService,
-    // BattleService,
+    BattleService,
     BuffService,
     BuildingService,
     CacheService,

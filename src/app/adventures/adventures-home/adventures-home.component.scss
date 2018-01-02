@@ -1,0 +1,45 @@
+.adventures {
+  height: 320px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: Breakable;
+
+  .header {
+    height: 30px;
+    margin-bottom: 5px;
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 10fr;
+      .icon img {
+        height: 20px;
+      }
+      .name {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+    width: 98%;
+    margin: 0 1% 5px 1%;
+    .adventure {
+      height: 100px;
+      > div {
+        border-radius: 5px;
+      }
+      .content {
+        display: grid;
+        grid-template-rows: 6fr 4fr;
+        .icon img {
+          height: 45px;
+        }
+        .name {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
