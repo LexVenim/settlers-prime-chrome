@@ -50,7 +50,7 @@ export class AdventuresHomeComponent implements OnInit {
   }
 
   selectAdventure(adventure){
-  	switch (this.router.prev()) {
+  	switch (this.router.getParams().parent) {
 
       case "battle":
         this.progress.set('Looking for trouble...')
@@ -67,7 +67,7 @@ export class AdventuresHomeComponent implements OnInit {
           console.log(this.ads.adventure)
           this.cache.set('settlersprime-adventure', this.ads.adventure.code)
           this.progress.unset()
-          this.router.go("adventure_info")
+          this.router.go(["adventures", adventure].join("/"))
         })
         break;
     }

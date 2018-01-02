@@ -4,16 +4,14 @@
     <div class="header container">
       <div class="bc-primary c-primary o-75"></div>
       <div class="header-content c-primary">
-        <div class="back center-content" *ngIf="now() != 'home'" (click)="back()">
+        <div class="back center-content" *ngIf="treeLength() > 1" (click)="back()">
           <i class="fa fa-chevron-left"></i>
         </div>
-        <div class="center-content" *ngIf="now() != 'home'" (click)="router.home()">
+        <div class="center-content" *ngIf="treeLength() > 2" (click)="home()">
           <i class="fa fa-home"></i>
         </div>
         <div class="title center-content">
-          <span (click)="home()">
-            Settlers Prime
-          </span>
+          Settlers Prime
         </div>
         <div class="logout center-content" *ngIf="auth.isLoggedIn()" (click)="logout()">
           <i class="fa fa-sign-out"></i>

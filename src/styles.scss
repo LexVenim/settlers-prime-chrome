@@ -102,7 +102,7 @@ body {
 
 @font-face {
   font-family: Breakable;
-  src: url('./assets/Breakable.otf');
+  src: url('./assets/ShakyHand.otf');
 }
 
 .loading {
@@ -110,4 +110,15 @@ body {
   width: 500px;
   font-size: 3em;
   font-family: Breakable;
+}
+
+.authed {
+  opacity: 0.75;
+  background: repeating-linear-gradient(-45deg, #AED6F1, #2980B9 5px, white 5px, white 10px);
+  color: #E74C3C;
+}
+.locked {
+  opacity: 0.75;
+  background: repeating-linear-gradient(-45deg, #EC7063, #EB984E 5px, white 5px, white 10px);
+  color: #5d1010;
 }

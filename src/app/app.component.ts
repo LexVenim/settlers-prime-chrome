@@ -35,7 +35,7 @@ export class AppComponent {
 		this.router.back()
 	}
 
-	now(){
-		return this.router.now()
+	treeLength(){
+		return this.router.length()
 	}
 }

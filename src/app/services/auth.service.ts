@@ -61,18 +61,7 @@ export class AuthService {
   private loadCache(){
     return new Promise((resolve, reject) => {
       this.loadServices().then(() => 
-        this.loadStateTree().then(() => resolve()))
-    })
-  }
-
-  private loadStateTree(){
-    this.progress.set('Growing the trees...')
-    return new Promise((resolve, reject) => {
-      this.cache.get("settlersprime-state").then((stateTree : any) => {
-        if(stateTree)
-          this.router.restore(stateTree)
-        resolve()
-      })
+        this.router.load().then(() => resolve()))
     })
   }
 

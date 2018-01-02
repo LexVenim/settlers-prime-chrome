@@ -8,7 +8,7 @@ export class CacheService {
 		'login': {},
 
 		'adventures': {adventures: true},
-		'adventure_info': {adventures: true, adventure: true},
+		'adventure': {adventures: true, adventure: true},
 		'guides': {adventures: true, adventure: true},
 		'guide': {adventures: true, adventure: true, guide: true},
 
