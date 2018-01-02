@@ -1,3 +1,60 @@
-<p>
-  adventure works!
-</p>
+<div class="adventure" *ngIf="!progress.message">
+	<div class="adventure-header container">
+		<div class="item-background bc-primary o-75"></div>
+		<div class="adventure-header-content c-primary">
+			<div class="adventure-header-top">
+				<div class="center-content">
+					<img src="{{ads.adventure.icon}}">
+				</div>
+				<div class="center-content">
+					{{ads.adventure.name}}
+				</div>
+			</div>
+			<div class="adventure-header-bottom">
+				<div class="center-content">
+					<img src="../../assets/icons/star.png">
+					{{ads.adventure.info.level}}
+				</div>
+				<div class="center-content">
+					<img src="../../assets/icons/group.png">
+					{{ads.adventure.info.players}}
+				</div>
+				<div class="center-content">
+				<img src="../../assets/icons/hourglass.png">
+					{{ads.adventure.info.time}}
+				</div>
+			</div>
+			<div class="adventure-header-bottom">
+				<div class="center-content">
+				<img src="../../assets/icons/medal.png">
+					{{ads.adventure.info.xp}}
+				</div>
+				<div class="center-content">
+					<img src="../../assets/icons/difficulty.png">
+					{{ads.adventure.info.difficulty}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="adventure-content">
+		<div *ngFor="let item of menu">
+			<div class="container item center-content c-secondary" (click)="goTo(item.page)">
+				<div class="item-background bc-secondary o-75"></div>
+				<div class="item-content">
+					<div class="item-icon center-content">
+						<img src="{{item.icon}}">
+					</div>
+					<div class="item-name center-content">
+						{{item.name}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>

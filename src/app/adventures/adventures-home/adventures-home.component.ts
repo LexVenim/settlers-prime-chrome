@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild  } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 import { BackendService, Adventure } from '../../services/backend/backend.service';
 import { CacheService } from '../../services/cache.service';
@@ -14,6 +15,7 @@ import { BattleService } from '../../services/battle.service';
   styleUrls: ['./adventures-home.component.scss']
 })
 export class AdventuresHomeComponent implements OnInit {
+  params
 
   categories = {
     "tutorial": {name: "Tutorial", order: 0},
@@ -35,9 +37,12 @@ export class AdventuresHomeComponent implements OnInit {
     private backend: BackendService,
     private cache: CacheService,
     private router: RoutingService,
+    private route: ActivatedRoute,
 
     public ads: AdventureService,
-    private battle: BattleService) { }
+    private battle: BattleService) {
+    this.route.params.subscribe( params => this.params = params );
+  }
 
   ngOnInit() {
     this.progress.set('Looking for trouble...')
@@ -50,12 +55,12 @@ export class AdventuresHomeComponent implements OnInit {
   }
 
   selectAdventure(adventure){
-  	switch (this.router.getParams().parent) {
+  	switch (this.params.parent) {
 
       case "battle":
         this.progress.set('Looking for trouble...')
         this.battle.selectAdventure(adventure).then(() => {
-          this.cache.set('settlersprime-battle-adventure', this.ads.adventure.code)
+          this.cache.set('settlersprime-battle-adventure', adventure)
           this.progress.unset()
           this.router.go("camps")
         })
@@ -63,12 +68,8 @@ export class AdventuresHomeComponent implements OnInit {
 
       default:
         this.progress.set('Looking for trouble...')
-        this.ads.select(adventure).then(() => {
-          console.log(this.ads.adventure)
-          this.cache.set('settlersprime-adventure', this.ads.adventure.code)
-          this.progress.unset()
-          this.router.go(["adventures", adventure].join("/"))
-        })
+        this.cache.set('settlersprime-adventure', adventure)
+        this.router.go(["/adventures", adventure])
         break;
     }
   }
