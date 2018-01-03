@@ -189,16 +189,26 @@ export class AuthService {
 
   createUser(id, data){
     return new Promise((resolve, reject) => {
-      this.progress.set("Conquering sectors...")
-      this.ss.createUser().then(sectors => {
 
-        this.progress.set("Building mayorhouse...")
-        data.buildings = this.bs.createUser()
-        data.sectors = sectors
+      this.progress.set('Loading...')
+      this.es.loadCache().then(() => {
+        // this.progress.set('Gathering up forces...')
+        // this.sls.loadCache().then(() => {
+        //   this.progress.set('Hiring specialists...')
+        //   this.sps.loadCache().then(() => {
+          this.progress.set("Conquering sectors...")
+          this.ss.createUser().then(sectors => {
 
-        this.us.create(id, data).then(() =>
-          resolve())
-      })
+            this.progress.set("Building mayorhouse...")
+            data.buildings = this.bs.createUser()
+            data.sectors = sectors
+
+            this.us.create(id, data).then(() =>
+              resolve())
+          })
+        })
+      //   })
+      // })
     })
   }
 
