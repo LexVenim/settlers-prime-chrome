@@ -46,7 +46,7 @@ export class AdventuresService {
 		return new Promise((resolve, reject) => {
 			this.backend.getItem('adventures', aCode).then((adventure : Adventure) => {
 				this.adventure = adventure
-		
+				
 				this.progress.set('Estimating enemy forces...')
 				this.es.load(aCode).then(() => {
 					this.progress.set('Gathering up troops...')
@@ -65,6 +65,20 @@ export class AdventuresService {
 					})
 				})
 			})
+		})
+	}
+
+	public selectIfEmpty(aCode){
+		return new Promise((resolve, reject) => {
+			if(!this.adventure){
+				this.progress.set('Looking for trouble...')
+				this.select(aCode).then(() => {
+					this.progress.unset()
+					resolve()
+				})
+			}
+			else
+				resolve()
 		})
 	}
 }

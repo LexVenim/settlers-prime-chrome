@@ -36,16 +36,7 @@ export class CampsComponent implements OnInit {
 		this.bs.clean()
 		this.cache.remove('settlersprime-battle-camp')
 
-		console.log(this.ads.adventure)
-		console.log(this.ss.sectors)
-
-		if(!this.ads.adventure){
-			console.log("wha?")
-			this.progress.set('Looking for trouble...')
-			this.ads.select(this.params.id).then(() => {
-				this.progress.unset()
-			})
-		}
+		this.ads.selectIfEmpty(this.params.id)
 	}
 
 	selectCamp(sector, camp){
@@ -54,8 +45,8 @@ export class CampsComponent implements OnInit {
 		this.router.go(["battle", "enemies"])
 	}
 
-	goToGuides(){
-		this.router.go(["adventures", this.params.id, "guides"])
+	goTo(page){
+		this.router.go(["adventures", this.params.id, page])
 	}
 
 	toggleZoom(){

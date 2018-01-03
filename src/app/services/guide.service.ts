@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { BackendService, Guide } from './backend/backend.service';
+import { ProgressService } from '../services/progress.service';
 
 import { CampService } from './camp.service';
 import { SpecialistService } from './specialist.service';
@@ -11,7 +12,10 @@ export class GuideService {
 	guides
 	guide
 
-	constructor(private backend: BackendService,
+	constructor(public progress: ProgressService,
+
+		private backend: BackendService,
+
 		public cs: CampService,
 		public sps: SpecialistService,
 		public sls: SoldierService) {}
@@ -27,7 +31,7 @@ export class GuideService {
 						gen.name = general.name
 						gen.order = general.order
 						return gen
-					}).sort((a,b) => a.order - b.order)
+					}).sort((a,b) => a.order - b.order).reverse()
 
 					guide.casualties = guide.casualties.map(cas => {
 						let soldier = this.sls.soldiers.find(s => s.code == cas.code)
@@ -45,12 +49,12 @@ export class GuideService {
 						return un
 					}).sort((a,b) => a.order - b.order)
 
-					let generalName = this.sps.getGeneralGuideName(guide.generals[guide.generals.length -1].code)
+					let generalName = this.sps.getGeneralGuideName(guide.generals[0].code)
 					let soldierName = this.sls.getSoldierGuideName(guide.units[guide.units.length -1].code)
 					guide.name = generalName + " with " + soldierName
 
 					return guide
-				})
+				}).sort((a,b) => a.name.localeCompare(b.name))
 
 				resolve()
 			})
@@ -59,6 +63,7 @@ export class GuideService {
 
 	public select(gcode){
 		return new Promise((resolve, reject) => {
+			this.progress.set('Planning attacks...')
 			let guide = this.guides.find(g => g.code == gcode)
 
 			this.cs.loadGuideCamps(guide).then((guideCamps) => {
