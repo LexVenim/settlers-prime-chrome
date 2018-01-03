@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
-import { AdventureService } from '../../services/adventure.service';
+import { AdventuresService } from '../adventures.service';
 import { ProgressService } from '../../services/progress.service';
 import { RoutingService } from '../../services/routing.service';
 
@@ -24,7 +24,7 @@ export class AdventureComponent implements OnInit {
     private router: RoutingService,
     private route: ActivatedRoute,
   	
-    public ads: AdventureService) { this.route.params.subscribe( params => this.params = params ) }
+    public ads: AdventuresService) { this.route.params.subscribe( params => this.params = params ) }
 
   ngOnInit() {
   	this.ads.select(this.params.id).then(() => {

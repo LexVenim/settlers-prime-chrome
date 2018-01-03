@@ -5,7 +5,7 @@ import { CacheService } from './cache.service';
 
 @Injectable()
 export class SoldierService {
-	soldiers
+	soldiers = []
 	soldier
 
 	constructor(private backend: BackendService,
@@ -17,6 +17,15 @@ export class SoldierService {
 				this.soldiers = soldiers.sort((a,b) => a.order - b.order)
 				resolve()
 			})
+		})
+	}
+
+	public loadIfEmpty(){
+		return new Promise((resolve, reject) => {
+			if(this.soldiers.length == 0)
+				this.loadCache().then(() => resolve())
+			else
+				resolve()
 		})
 	}
 

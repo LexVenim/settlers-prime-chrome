@@ -6,7 +6,7 @@ import { CacheService } from '../../services/cache.service';
 import { ProgressService } from '../../services/progress.service';
 import { RoutingService } from '../../services/routing.service';
 
-import { AdventureService } from '../../services/adventure.service';
+import { AdventuresService } from '../adventures.service';
 import { BattleService } from '../../services/battle.service';
 import { CampService } from '../../services/camp.service';
 import { SectorService } from '../../services/sector.service';
@@ -27,7 +27,7 @@ export class CampsComponent implements OnInit {
 		private router: RoutingService,
 		private route: ActivatedRoute,
 
-		public ads: AdventureService,
+		public ads: AdventuresService,
 		public bs: BattleService,
 		public cs: CampService,
 		public ss: SectorService) { this.route.params.subscribe( params => this.params = params ) }

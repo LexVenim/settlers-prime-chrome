@@ -6,7 +6,7 @@ import { CacheService } from '../../services/cache.service';
 import { ProgressService } from '../../services/progress.service';
 import { RoutingService } from '../../services/routing.service';
 
-import { AdventureService } from '../../services/adventure.service';
+import { AdventuresService } from '../adventures.service';
 import { BattleService } from '../../services/battle.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class AdventuresHomeComponent implements OnInit {
     private router: RoutingService,
     private route: ActivatedRoute,
 
-    public ads: AdventureService,
+    public ads: AdventuresService,
     private battle: BattleService) {
     this.route.params.subscribe( params => this.params = params );
   }

@@ -24,6 +24,9 @@ export class AuthService {
   private isLogged = false
   private user: Observable<firebase.User>;
 
+  private wasLogged
+  private authChecked = false
+
   constructor(public progress: ProgressService,
 
     private af: AngularFireAuth,
@@ -42,8 +45,10 @@ export class AuthService {
     private us: UserService) 
   {
     let spVersion = '2.9.9'
-    this.cache.get('settlersprime-version').then(version => {
 
+    this.progress.set("Loading...")
+
+    this.cache.get('settlersprime-version').then(version => {
       if(!version || version != spVersion){
         this.cache.clear()
         this.cache.set('settlersprime-version', spVersion)
@@ -52,52 +57,58 @@ export class AuthService {
       else
         console.log('Version is up-to-date')
 
-      this.user = af.authState;
-      this.loadCache().then(() =>
-        this.user.subscribe(auth => auth == null ? this.loadUnauthorized() : this.loadAuthorized(auth)))
-    })
-  }
+      this.cache.get("settlersprime-logged").then(wasLogged => {
+        this.wasLogged = wasLogged
 
-  private loadCache(){
-    return new Promise((resolve, reject) => {
-      this.loadServices().then(() => 
-        this.router.load().then(() => resolve()))
-    })
-  }
-
-  private loadServices(){
-    return new Promise((resolve, reject) => {
-
-      this.progress.set('Loading...')
-      this.es.loadCache().then(() => {
-        this.progress.set('Acquiring blueprints...')
-        this.bs.loadCache().then(() => {
-          this.progress.set('Visiting Aunt Irma...')
-          this.bfs.loadCache().then(() => {
-            this.progress.set('Searching for resources...')
-            this.rs.loadCache().then(() => {
-              this.progress.set('Drawing maps...')
-              this.ss.loadCache().then(() => {
-                this.progress.set('Gathering up forces...')
-                this.sls.loadCache().then(() => {
-                  this.progress.set('Hiring specialists...')
-                  this.sps.loadCache().then(() =>
-                    resolve())
-                })
-              })
-            })
-          })
+        this.user = af.authState;
+        this.router.load().then(() => {
+          this.user.subscribe(auth => auth == null ? this.loadUnauthorized() : this.loadAuthorized(auth))
         })
       })
     })
   }
 
+  // private loadCache(){
+  //   return new Promise((resolve, reject) => {
+  //     this.loadServices().then(() => 
+  //       this.router.load().then(() => resolve()))
+  //   })
+  // }
+
+  // private loadServices(){
+  //   return new Promise((resolve, reject) => {
+
+  //     this.progress.set('Loading...')
+  //     this.es.loadCache().then(() => {
+  //       this.progress.set('Acquiring blueprints...')
+  //       this.bs.loadCache().then(() => {
+  //         this.progress.set('Visiting Aunt Irma...')
+  //         this.bfs.loadCache().then(() => {
+  //           this.progress.set('Searching for resources...')
+  //           this.rs.loadCache().then(() => {
+  //             this.progress.set('Drawing maps...')
+  //             this.ss.loadCache().then(() => {
+  //               this.progress.set('Gathering up forces...')
+  //               this.sls.loadCache().then(() => {
+  //                 this.progress.set('Hiring specialists...')
+  //                 this.sps.loadCache().then(() =>
+  //                   resolve())
+  //               })
+  //             })
+  //           })
+  //         })
+  //       })
+  //     })
+  //   })
+  // }
+
   private loadAuthorized(auth){
     this.isLogged = true
-    this.progress.set('Coming to the light...')
-
     this.createUserIfNotExist(auth).then(() =>         
       this.loadUser(auth.uid).then(() => {
+        if(!this.authChecked)
+          this.router.restore()
+        this.authChecked = true
         this.progress.unset()
         this.cache.set("settlersprime-logged", true)
       }))
@@ -105,9 +116,13 @@ export class AuthService {
 
   private loadUnauthorized(){
     this.isLogged = false
-    this.progress.unset()
-
-    this.cache.set("settlersprime-logged", false)
+    if(this.authChecked || !this.wasLogged){
+      if(!this.authChecked)
+        this.router.restore()
+      this.authChecked = true
+      this.progress.unset()
+      this.cache.set("settlersprime-logged", false)
+    }
   }
 
   // auth methods
@@ -192,10 +207,10 @@ export class AuthService {
       this.progress.set("Going through papers..")
       this.us.load(id).then(res => {
 
-        this.bs.loadUser()
-        this.bfs.loadUser()
-        this.rs.loadUser()
-        this.ss.loadUser()
+        // this.bs.loadUser()
+        // this.bfs.loadUser()
+        // this.rs.loadUser()
+        // this.ss.loadUser()
 
         this.progress.set("Taking over the world...")
         resolve()

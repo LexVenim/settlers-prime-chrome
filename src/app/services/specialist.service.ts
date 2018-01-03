@@ -61,6 +61,15 @@ export class SpecialistService {
 		})
 	}
 
+	public loadIfEmpty(){
+		return new Promise((resolve, reject) => {
+			if(this.specialists.length == 0)
+				this.loadCache().then(() => resolve())
+			else
+				resolve()
+		})
+	}
+
 	public loadCache(){
 		return new Promise((resolve, reject) => 
 			this.cache.get('settlersprime-specialists').then((specialists : Array<Specialist>) => {

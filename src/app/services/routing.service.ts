@@ -14,14 +14,16 @@ export class RoutingService {
   public load(){
     return new Promise((resolve, reject) => {
       this.cache.get("settlersprime-tree").then((tree : any) => {
-        if(tree){
-          this.tree = tree
-          this.router.navigate(this.tree[this.tree.length - 1])
-        }
+        if(tree)
+          this.tree = tree        
         this.loaded = true
         resolve()
       })
     })
+  }
+
+  public restore(){
+    this.router.navigate(this.tree[this.tree.length - 1])
   }
 
   public isLoaded(){

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { BackendService } from './backend/backend.service';
 
-import { AdventureService } from './adventure.service';
 import { CampService } from './camp.service';
 import { SpecialistService } from './specialist.service';
 
@@ -16,16 +15,15 @@ export class BattleService {
   soldiersCategory = "normal"
 
   constructor(private backend: BackendService,
-    public ads: AdventureService,
     public cs: CampService,
     public sps: SpecialistService) { }
 
   public selectAdventure(acode){
     return new Promise((resolve, reject) => {
-      this.ads.select(acode).then(() => {
+      // this.ads.select(acode).then(() => {
         this.selectMode("adventure")
         resolve()
-      })
+      // })
     })
   }
 
@@ -47,10 +45,10 @@ export class BattleService {
       this.selectGeneral("marshal")
   }
 
-  public simulateBattle(){
+  public simulateBattle(adventure){
     return new Promise((resolve, reject) => {
       let params = {
-        adventure: this.mode == "adventure" ? this.ads.adventure.code : null,
+        adventure: this.mode == "adventure" ? adventure : null,
         enemies: this.enemies
         .filter(e => e.amount > 0)
         .map(e => e.code + '_' + e.amount)

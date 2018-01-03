@@ -21,7 +21,6 @@ import { firebaseConfig } 						from './common/firebase.config';
 import { BackendService } from './services/backend/backend.service';
 import { AsyncHttpManager } from './services/backend/async_http.manager';
 
-import { AdventureService } from './services/adventure.service';
 import { AuthService } from './services/auth.service';
 import { BattleService } from './services/battle.service';
 import { BuffService } from './services/buff.service';
@@ -82,7 +81,6 @@ import { NotFoundComponent }          from './not-found/not-found.component';
   ],
   providers: [
     AuthGuard, 
-    AdventureService,
     AuthService,
     BattleService,
     BuffService,

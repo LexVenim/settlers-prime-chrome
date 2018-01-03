@@ -10,7 +10,7 @@ import { UserService } from './user.service';
 
 @Injectable()
 export class SectorService {
-  sectors
+  sectors = []
   sector
 
   constructor(public db: AngularFireDatabase,
