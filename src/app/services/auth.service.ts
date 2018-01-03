@@ -44,7 +44,7 @@ export class AuthService {
     // private settings: SettingsService,
     private us: UserService) 
   {
-    let spVersion = '2.9.9'
+    let spVersion = '3.0.0'
 
     this.progress.set("Loading...")
 
