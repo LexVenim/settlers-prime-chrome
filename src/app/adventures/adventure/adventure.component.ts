@@ -12,6 +12,7 @@ import { RoutingService } from '../../services/routing.service';
 })
 export class AdventureComponent implements OnInit {
 	params
+  zoomed = false
 
 	menu = [
 		{page: "camps", icon: "../../assets/icons/flag.png", name: "Camps"},
@@ -23,10 +24,7 @@ export class AdventureComponent implements OnInit {
     private router: RoutingService,
     private route: ActivatedRoute,
   	
-    public ads: AdventureService) {
-
-  	this.route.params.subscribe( params => this.params = params );
-  }
+    public ads: AdventureService) { this.route.params.subscribe( params => this.params = params ) }
 
   ngOnInit() {
   	this.ads.select(this.params.id).then(() => {
@@ -36,5 +34,9 @@ export class AdventureComponent implements OnInit {
 
   goTo(page){
   	this.router.go(["adventures", this.params.id, page])
+  }
+
+  toggleZoom(){
+    this.zoomed = !this.zoomed
   }
 }

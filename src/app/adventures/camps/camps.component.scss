@@ -1,0 +1,147 @@
+.camps {
+  height: 97%;
+  width: 98%;
+  margin: 1%;
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  grid-gap: 5px;
+  font-family: Breakable;
+
+  .info {
+    overflow: auto;
+    .header {
+      height: 30px;
+      margin-bottom: 5px;
+      .content {
+        display: grid;
+        grid-template-columns: 1fr 10fr;
+        .icon img {
+          height: 20px;
+        }
+        .name {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .list {
+      width: 98%;
+      margin: 0 1% 5px 1%;
+      .camp {
+        height: 60px;
+        margin: 5px 0;
+        > div {
+          border-radius: 5px;
+        }
+        .button {
+          font-size: 16px;
+          > div {
+            border-radius: 5px;
+            width: 90%;
+            height: 80%;
+            margin: 10% 5%;
+          }
+        }
+        .content {
+          display: grid;
+          grid-template-columns: 1fr 3fr 1fr;
+          .icon {
+            font-size: 20px;
+            img {
+              height: 25px;
+              margin-right: 5px;
+            }
+          }
+          .units {
+            display: flex;
+            .unit {
+              margin: 0 1px;
+              font-size: 16px;
+              img {
+                height: 30px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.side-menu {
+  display: grid;
+  grid-template-rows: 5fr repeat(3, 1fr) 4fr;
+  grid-gap: 5px;
+  > div {
+    border-radius: 5px;
+  }
+  .avatar {
+    .content {
+      display: grid;
+      grid-template-rows: 7fr 3fr;
+      .icon img {
+        height: 70px;
+      }
+      .name {
+        font-size: 20px;
+      }
+    }
+  }
+  .side-item {
+    .content {
+      display: grid;
+      grid-template-columns: 2fr 5fr;
+      border-top: 1px dotted;
+      .icon  img {
+        height: 20px;
+      }
+      .text {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.map {
+  height: 100%;
+  .zoom {
+    width: 30px;
+    height: 30px;
+    bottom: 10px;
+    right: 6px;
+    top: unset;
+    left: unset;
+    > div {
+      border-radius: 15px;
+      font-size: 14px;
+    }
+  }
+  
+  img {
+    max-width: 100%;
+  }
+}
+
+.map.map-big {
+  .wrapper{
+    overflow: hidden;
+    > div {
+      overflow: auto;
+      width: 500px;
+      height: 320px;
+    }
+    img {
+      max-width: 1500px;
+    }
+  }
+  .zoom {
+    width: 40px;
+    height: 40px;
+    bottom: 20px;
+    right: 20px;
+    > div {
+      border-radius: 20px;
+      font-size: 18px;
+    }
+  }
+}
