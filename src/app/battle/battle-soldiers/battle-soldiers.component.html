@@ -1,3 +1,32 @@
-<p>
-  battle-soldiers works!
-</p>
+<div class="units" *ngIf="units">
+	<div class="list">
+		<div *ngFor="let unit of units">
+			<div class="container unit center-content c-primary" [ngClass]="{'locked': unit.amount == 0}">
+				<div class="background bc-primary o-75"></div>
+				<div class="content">
+					<div class="icon center-content">
+						<img src="{{unit.icon}}">
+					</div>
+					<div class="name center-content">
+						{{unit.name}}
+					</div>
+					<div class="input center-content">
+						<input type="number" [(ngModel)]="unit.amount" [min]="0" [max]="200" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer container" (click)="next()">
+		<div class="background bc-ternary o-75"></div>
+		<div class="content center-content c-secondary">
+			Next
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="!units">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		Loading...
+	</div>
+</div>

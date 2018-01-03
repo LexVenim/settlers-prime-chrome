@@ -89,8 +89,8 @@ export class SpecialistService {
 		return this.specialists.find(sp => sp.code == spcode)
 	}
 
-	public getGenerals(canFight){
-		return this.specialists.filter(g => (g.cayegory == 'general' && (!g.abilities || !g.abilities.cantfight)))
+	public getGenerals(){
+		return this.specialists.filter(g => (g.category == 'general' && (!g.abilities || !g.abilities.cantfight)))
 	}
 
 	public getGeneralGuideName(gcode){

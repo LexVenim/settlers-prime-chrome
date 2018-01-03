@@ -1,3 +1,147 @@
-<p>
-  battle-log works!
-</p>
+<div class="log" *ngIf="battle.log">
+	<div class="log-header">
+		<div class="log-spin container">
+			<div class="bc-primary o-75"></div>
+			<div class="log-spin-content center-content c-primary">
+				<div class="log-spin-left center-content" *ngIf="current.round != 0">
+					<i class="fa fa-chevron-left" (click)="previousRound()"></i>
+				</div>
+				<div class="log-spin-center center-content">
+					Round {{current.round + 1}}
+				</div>
+				<div class="log-spin-right center-content" *ngIf="current.round != (battle.log.length - 2)">
+					<i class="fa fa-chevron-right" (click)="nextRound()"></i>
+				</div>
+			</div>
+		</div>
+
+		<div class="log-spin container">
+			<div class="bc-secondary o-75"></div>
+			<div class="log-spin-content center-content c-secondary">
+				<div class="log-spin-left center-content" *ngIf="current.phases.num != 0">
+					<i class="fa fa-chevron-left" (click)="previousPhase()"></i>
+				</div>
+				<div class="log-spin-center center-content">
+					{{ current.phases.list[current.phases.num].name }}
+				</div>
+				<div class="log-spin-right center-content" *ngIf="current.phases.num != (current.phases.list.length - 1)">
+					<i class="fa fa-chevron-right" (click)="nextPhase()"></i>
+				</div>
+			</div>
+		</div>
+
+		<div class="log-spin container">
+			<div class="bc-primary o-75"></div>
+			<div class="log-spin-content center-content c-primary">
+				<div class="log-spin-left center-content" *ngIf="current.tabs.num != 0">
+					<i class="fa fa-chevron-left" (click)="previousTab()"></i>
+				</div>
+				<div class="log-spin-center center-content">
+					{{ current.tabs.list[current.tabs.num].name }}
+				</div>
+				<div class="log-spin-right center-content" *ngIf="current.tabs.num != (current.tabs.list.length - 1)">
+					<i class="fa fa-chevron-right" (click)="nextTab()"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="log-attacks" *ngIf="current.tabs.list[current.tabs.num].attacks">
+		<div class="log-attacks-wrapper">
+			<div class="attack" *ngFor="let unit of current.tabs.list[current.tabs.num].attacks">
+				<div class="attack-header container">
+					<div class="bc-primary o-75"></div>
+					<div class="attack-header-content c-positive">
+						<div class="attack-icon center-content">
+							<img src="../../assets/icons/flash.png">
+							{{unit.num}}
+						</div>
+						<div class="attack-unit-icon center-content">
+							<img src="{{unit.icon}}">
+						</div>
+						<div class="attack-text left-content">
+							{{unit.name}}
+						</div>
+						<div class="blow-text center-content">
+							{{unit.blows[0].full_damage}}
+						</div>
+					</div>
+				</div>
+
+				<div class="attack-blows">
+					<div class="attack-blow container" *ngFor="let blow of unit.blows; let bi = index" [attr.data-index]="bi">
+						<div class="bc-secondary o-75"></div>
+						<div class="attack-blow-content c-negative">
+							<div class="blow-icon center-content">
+								<img src="../../assets/icons/wound.png" *ngIf="blow.status == 'wound'">
+								<img src="../../assets/icons/death.png" *ngIf="blow.status == 'kill'">
+							</div>
+							<div class="blow-unit-icon center-content">
+								<img src="{{blow.icon}}">
+							</div>
+							<div class="blow-text left-content">
+								{{blow.name}}
+							</div>
+							<div class="blow-text center-content">
+								{{blow.damage}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="log-casualties container" *ngIf="current.tabs.list[current.tabs.num].casualties">
+		<div class="bc-primary o-75"></div>
+		<div class="log-casualties-content center-content c-primary">
+			<div class="log-casualties-header center-content">
+				Soldiers
+			</div>
+
+			<div class="log-casualties-side center-content" *ngIf="current.tabs.list[current.tabs.num].casualties.soldiers.length > 0 || current.tabs.list[current.tabs.num].casualties.general">
+
+				<div class="log-casualties-unit" *ngIf="current.tabs.list[current.tabs.num].casualties.general">
+					<div class="center-content">
+						<img src="{{current.tabs.list[current.tabs.num].casualties.general.icon}}">
+					</div>
+					<div class="battle-preview-unit-text center-content">
+						{{current.tabs.list[current.tabs.num].casualties.general.amount}}
+					</div>
+				</div>
+
+				<div class="log-casualties-unit" *ngFor="let soldier of current.tabs.list[current.tabs.num].casualties.soldiers">
+					<div class="center-content">
+						<img src="{{soldier.icon}}">
+					</div>
+					<div class="battle-preview-unit-text center-content">
+						{{soldier.amount}}
+					</div>
+				</div>
+
+			</div>
+			<div class="log-casualties-side center-content" *ngIf="current.tabs.list[current.tabs.num].casualties.soldiers.length == 0 && !current.tabs.list[current.tabs.num].casualties.general">
+				No casualties
+			</div>
+
+			<div class="log-casualties-header center-content">
+				Enemies
+			</div>
+
+			<div class="log-casualties-side center-content" *ngIf="current.tabs.list[current.tabs.num].casualties.enemies.length > 0">
+				<div class="log-casualties-unit" *ngFor="let enemy of current.tabs.list[current.tabs.num].casualties.enemies">
+					<div class="center-content">
+						<img src="{{enemy.icon}}">
+					</div>
+					<div class="battle-preview-unit-text center-content">
+						{{enemy.amount}}
+					</div>
+				</div>
+			</div>
+
+			<div class="log-casualties-side center-content" *ngIf="current.tabs.list[current.tabs.num].casualties.enemies.length == 0">
+				No casualties
+			</div>
+		</div>
+	</div>
+</div>

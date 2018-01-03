@@ -1,0 +1,42 @@
+.units {
+  height: 97%;
+  width: 98%;
+  margin: 1%;
+  display: grid;
+  grid-template-rows: 7fr 1fr;
+  grid-gap: 5px;
+  font-family: Breakable;
+
+  .footer {
+    .content {
+      font-size: 20px;
+    }
+  }
+  .list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+    overflow: auto;
+    max-height: 280px;
+    .unit {
+      min-height: 140px;
+      > div {
+        border-radius: 10px;
+      }
+      .content {
+        display: grid;
+        grid-template-rows: 2fr 1fr 1fr;
+        .icon img {
+          height: 50px;
+        }
+        .input {
+
+        }
+        .name {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+

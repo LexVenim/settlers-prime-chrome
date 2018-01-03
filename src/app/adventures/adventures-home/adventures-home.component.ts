@@ -46,29 +46,15 @@ export class AdventuresHomeComponent implements OnInit {
 
   ngOnInit() {
     this.progress.set('Looking for trouble...')
-
     this.cache.remove('settlersprime-adventure')
-    this.cache.remove('settlersprime-battle-adventure')
-
     this.ads.loadAdventureCategories().then(() => this.progress.unset())
   }
 
   selectAdventure(adventure){
-  	switch (this.params.parent) {
+    this.progress.set('Looking for trouble...')
+    this.cache.set('settlersprime-adventure', adventure)
 
-      case "battle":
-        this.progress.set('Looking for trouble...')
-        this.cache.set('settlersprime-battle-adventure', adventure)
-        this.progress.unset()
-        this.router.go(["adventures", adventure, "camps", {parent: 'battle'}])
-        break;
-
-      default:
-        this.progress.set('Looking for trouble...')
-        this.cache.set('settlersprime-adventure', adventure)
-        this.router.go(["adventures", adventure])
-        break;
-    }
+  	this.params.parent == "battle" ? this.router.go(["adventures", adventure, "camps", {parent: 'battle'}]) : this.router.go(["adventures", adventure])
   }
 
 }

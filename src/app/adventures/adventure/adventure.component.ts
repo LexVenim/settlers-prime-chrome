@@ -27,9 +27,7 @@ export class AdventureComponent implements OnInit {
     public ads: AdventuresService) { this.route.params.subscribe( params => this.params = params ) }
 
   ngOnInit() {
-  	this.ads.select(this.params.id).then(() => {
-  		this.progress.unset()
-  	})
+    this.ads.selectIfDiffirent(this.params.id).then(() => this.progress.unset())
   }
 
   goTo(page){

@@ -1,7 +1,7 @@
 <div class="units" *ngIf="units">
 	<div class="list">
 		<div *ngFor="let unit of units">
-			<div class="container unit center-content c-primary" [ngClass]="{'locked': unit.amount == 0}">
+			<div class="container unit center-content c-primary" [ngClass]="{'locked': unit.code != general}" (click)="select(unit.code)">
 				<div class="background bc-primary o-75"></div>
 				<div class="content">
 					<div class="icon center-content">
@@ -9,9 +9,6 @@
 					</div>
 					<div class="name center-content">
 						{{unit.name}}
-					</div>
-					<div class="input center-content">
-						<input type="number" [(ngModel)]="unit.amount" [min]="0" [max]="200" />
 					</div>
 				</div>
 			</div>

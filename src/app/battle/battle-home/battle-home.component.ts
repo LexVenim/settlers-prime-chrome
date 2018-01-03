@@ -40,7 +40,7 @@ export class BattleHomeComponent implements OnInit {
   	this.bs.clean()
 
     this.cache.remove('settlersprime-battle-mode')
-		this.cache.remove('settlersprime-battle-adventure')
+		this.cache.remove('settlersprime-adventure')
   }
 
   select(page){
@@ -48,29 +48,29 @@ export class BattleHomeComponent implements OnInit {
     if(!item.lock){
     	switch (page) {
 			case "adventures":
-				this.bs.selectMode("adventures")
+				this.bs.selectMode("adventure")
 				this.cache.set('settlersprime-battle-mode', "adventure")
 				this.router.go(["adventures", {parent: 'battle'}])
 				break;
 
 			case "archipelago":
-				this.bs.selectMode("adventures")
-				this.cache.set('settlersprime-battle-adventure', "archipelago")
+				this.bs.selectMode("adventure")
+				this.cache.set('settlersprime-adventure', "archipelago")
 				this.cache.set('settlersprime-battle-mode', "adventure")
 				this.router.go(["adventures", "archipelago", "camps", {parent: 'battle'}])
 				break;
 
 			case "colonies":
 				this.sps.load('marshal').then(() => {
-					this.bs.selectMode("colonies")
+					this.bs.selectMode("colony")
 					this.cache.set('settlersprime-battle-mode', "colonies")
 					this.router.go(["battle", "enemies"])
 				})
 				break;
 			
 			default:
-				this.bs.selectMode("adventures")
-				this.cache.set('settlersprime-battle-adventure', "island")
+				this.bs.selectMode("adventure")
+				this.cache.set('settlersprime-adventure', "island")
 				this.cache.set('settlersprime-battle-mode', "adventure")
 				this.router.go(["adventures", "island", "camps", {parent: 'battle'}])
 				break;

@@ -3,6 +3,7 @@ import { CommonModule }             from '@angular/common';
 import { FormsModule }              from '@angular/forms';
  
 import { BattleEnemiesComponent }   from './battle-enemies/battle-enemies.component';
+import { BattleGeneralsComponent }  from './battle-generals/battle-generals.component';
 import { BattleHomeComponent }      from './battle-home/battle-home.component';
 import { BattleLogComponent }       from './battle-log/battle-log.component';
 import { BattlePreviewComponent }   from './battle-preview/battle-preview.component';
@@ -22,6 +23,7 @@ import { BattleRoutesModule }             from './battle.routes';
   ],
   declarations: [
     BattleEnemiesComponent,
+    BattleGeneralsComponent,
     BattleHomeComponent,
     BattleLogComponent,
     BattlePreviewComponent,

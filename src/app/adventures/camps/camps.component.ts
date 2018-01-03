@@ -35,8 +35,10 @@ export class CampsComponent implements OnInit {
 	ngOnInit() {
 		this.bs.clean()
 		this.cache.remove('settlersprime-battle-camp')
+		this.cache.remove('settlersprime-battle-units')
+		this.cache.remove('settlersprime-battle-general')
 
-		this.ads.selectIfDiffirent(this.params.id)
+		this.ads.selectIfDiffirent(this.params.id).then(() => this.progress.unset())
 	}
 
 	selectCamp(sector, camp){
@@ -68,7 +70,6 @@ export class SectorFilterPipe implements PipeTransform {
 			return items;
 		}
 
-		console.log(items)
 		return items.filter(item => filter.filter(c => c.sector == item.code).length > 0);
 	}
 }

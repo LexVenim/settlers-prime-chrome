@@ -1,0 +1,98 @@
+.log {
+  height: 310px;
+  overflow: hidden;
+  font-family: Breakable;
+  .log-attacks {
+    height: 220px;
+    overflow: hidden;
+    .log-attacks-wrapper {
+      height: 200px;
+      width: 315px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .attack {
+      margin: 5px;
+      .attack-header {
+        height: 30px;
+        font-size: 18px;
+        > div {
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        .attack-header-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr 3fr 1fr;
+          .attack-unit-icon img {
+            height: 30px;
+          }
+          .attack-icon img {
+            height: 18px;
+          }
+        }
+      }
+      .attack-blows .attack-blow {
+        height: 25px;
+        font-size: 16px;
+        &:last-of-type > div {
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+        .attack-blow-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr 3fr 1fr;
+          .blow-unit-icon img {
+            height: 30px;
+          }
+          .blow-icon img {
+            height: 18px;
+          }
+        }
+      }
+    }
+  }
+  .log-casualties {
+    height: 195px;
+    font-size: 20px;
+    .log-casualties-content {
+      display: grid;
+      .log-casualties-header {
+        height: 30px;
+      }
+      .log-casualties-side {
+        height: 67px;
+        width: 220px;
+        display: flex;
+        border-bottom: 2px solid dimgrey;
+        .log-casualties-unit {
+          font-size: 18px;
+          margin: 0 1px;
+          img {
+            height: 35px;
+          }
+        }
+      }
+    }
+  }
+  .log-header {
+    height: 105px;
+    .log-spin {
+      height: 30px;
+      margin: 5px 0;
+      font-size: 18px;
+      .log-spin-content {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        .log-spin-left {
+          grid-column: 1;
+        }
+        .log-spin-center {
+          grid-column: 2;
+        }
+        .log-spin-right {
+          grid-column: 3;
+        }
+      }
+    }
+  }
+}

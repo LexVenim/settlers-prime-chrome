@@ -102,6 +102,7 @@ export class SectorService {
     })
   }
 
+  // big bad wolf
   public loadCache(){
     return new Promise((resolve, reject) => 
       this.cache.get('settlersprime-sectors').then(sectors => 

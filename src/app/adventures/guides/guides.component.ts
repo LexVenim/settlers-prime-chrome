@@ -33,10 +33,8 @@ export class GuidesComponent implements OnInit {
 	}
 
 	selectGuide(gcode){
-		// this.gs.select(gcode).then(() => {
 			this.cache.set('settlersprime-guide', gcode)
 			this.router.go(["adventures", this.params.id, "guides", gcode])
-		// })
 	}
 
 	goTo(page){

@@ -7,11 +7,11 @@ import { SpecialistService } from './specialist.service';
 
 @Injectable()
 export class BattleService {
-  enemies
+  enemies = []
   general = null
   log = null
-  mode = null
-  soldiers = null
+  mode = "adventure"
+  soldiers = []
   soldiersCategory = "normal"
 
   constructor(private backend: BackendService,
@@ -65,8 +65,8 @@ export class BattleService {
   }
 
   public clean(){
-    this.soldiers = null
-    this.enemies = null
+    this.soldiers = []
+    this.enemies = []
   }
 
   public toggleSoldiersCategory(){

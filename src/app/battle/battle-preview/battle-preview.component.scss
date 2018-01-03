@@ -1,0 +1,43 @@
+.preview {
+  height: 97%;
+  width: 98%;
+  margin: 1%;
+  display: grid;
+  grid-template-rows: 7fr 1fr;
+  grid-gap: 5px;
+  font-family: Breakable;
+
+  .footer {
+    .content {
+      font-size: 20px;
+    }
+  }
+  .preview-center {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 6fr;
+    grid-gap: 5px;
+    .header {
+      .content {
+        img {
+          height: 50px;
+          margin-left: 5px;
+        }
+        font-size: 22px;
+      }
+    }
+    .units {
+      .content {
+        display: flex;
+        .unit {
+          height: 80px;
+          display: grid;
+          font-size: 22px;
+          .icon img {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}

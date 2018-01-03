@@ -1,3 +1,63 @@
-<p>
-  battle-preview works!
-</p>
+<div class="preview" *ngIf="!progress.message">
+	<div class="preview-center">
+		<div class="header container">
+			<div class="bc-secondary o-75"></div>
+			<div class="content center-content c-secondary" *ngIf="bs.general">
+				<img src="{{bs.general.icon}}">
+				You
+			</div>
+		</div>
+
+		<div class="header container">
+			<div class="bc-secondary o-75"></div>
+			<div class="content center-content c-secondary">
+				Enemy
+			</div>
+		</div>
+
+		<div class="units container">
+			<div class="bc-primary o-75"></div>
+			<div class="content center-content">
+				<div *ngFor="let unit of bs.soldiers">
+					<div class="unit center-content c-primary" *ngIf="unit.amount > 0">
+						<div class="icon center-content">	
+							<img src="{{unit.icon}}">
+						</div>
+						<div class="amount center-content">
+							{{unit.amount}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="units container">
+			<div class="bc-primary o-75"></div>
+			<div class="content center-content">
+				<div *ngFor="let unit of bs.enemies">	
+					<div class="unit center-content c-primary" *ngIf="unit.amount > 0">
+						<div class="icon center-content">	
+							<img src="{{unit.icon}}">
+						</div>
+						<div class="amount center-content">
+							{{unit.amount}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer container" (click)="simulateBattle()">
+		<div class="background bc-ternary o-75"></div>
+		<div class="content center-content c-secondary">
+			Simulate Battle
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>

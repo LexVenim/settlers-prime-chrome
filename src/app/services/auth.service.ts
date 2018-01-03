@@ -163,10 +163,10 @@ export class AuthService {
   logout() {
 
     this.us.clearUser()
-    this.bs.clearUser()
-    this.bfs.clearUser()
-    this.rs.clearUser()
-    this.ss.clearUser()
+    // this.bs.clearUser()
+    // this.bfs.clearUser()
+    // this.rs.clearUser()
+    // this.ss.clearUser()
 
     this.router.home()
     return this.af.auth.signOut()
