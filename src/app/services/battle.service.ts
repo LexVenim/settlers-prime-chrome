@@ -18,15 +18,6 @@ export class BattleService {
     public cs: CampService,
     public sps: SpecialistService) { }
 
-  public selectAdventure(acode){
-    return new Promise((resolve, reject) => {
-      // this.ads.select(acode).then(() => {
-        this.selectMode("adventure")
-        resolve()
-      // })
-    })
-  }
-
   public selectCamp(camp){
     this.enemies = this.cs.camps.find(c => c.code == camp).enemies
   }

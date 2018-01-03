@@ -1,0 +1,58 @@
+.battle {
+  height: 97%;
+  width: 98%;
+  margin: 1%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+  font-family: Breakable;
+  
+  .item {
+    height: 100%;
+    > div {
+      border-radius: 10px;
+    }
+    .content {
+      display: grid;
+      grid-template-rows: 6fr 4fr;
+      .icon img {
+        height: 60px;
+      }
+      .name {
+        font-size: 24px;
+      }
+    }
+  }
+  .item-left {
+    grid-area: 1/1/3/2;
+    .content {
+      display: grid;
+      grid-template-rows: 12fr repeat(4, 5fr);
+      grid-gap: 5px;
+      .avatar {
+        display: grid;
+        grid-template-rows: 7fr 3fr;
+        .icon img {
+          height: 70px;
+        }
+        .name {
+          font-size: 20px;
+        }
+      }
+      .side-item {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        border-top: 1px dotted;
+        .icon img {
+          height: 30px;
+        }
+        .name {
+          font-size: 16px;
+        }
+      }
+      .side-item.side-item-empty {
+        display: flex;
+      }
+    }
+  }
+}

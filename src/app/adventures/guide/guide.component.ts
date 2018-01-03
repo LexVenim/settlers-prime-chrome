@@ -33,7 +33,7 @@ export class GuideComponent implements OnInit {
 		public ss: SectorService) { this.route.params.subscribe( params => this.params = params ) }
 
 	ngOnInit() {
-		this.ads.selectIfEmpty(this.params.id).then(() => 
+		this.ads.selectIfDiffirent(this.params.id).then(() => 
 			this.gs.select(this.params.gid).then(() => {
 				this.progress.unset()
 				console.log(this.gs.guide)

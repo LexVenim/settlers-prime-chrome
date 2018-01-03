@@ -68,9 +68,9 @@ export class AdventuresService {
 		})
 	}
 
-	public selectIfEmpty(aCode){
+	public selectIfDiffirent(aCode){
 		return new Promise((resolve, reject) => {
-			if(!this.adventure){
+			if(!this.adventure || this.adventure.code != aCode){
 				this.progress.set('Looking for trouble...')
 				this.select(aCode).then(() => {
 					this.progress.unset()

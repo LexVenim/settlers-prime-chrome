@@ -29,7 +29,7 @@ export class GuidesComponent implements OnInit {
 	ngOnInit() {
 		this.cache.remove('settlersprime-guide')
 
-		this.ads.selectIfEmpty(this.params.id)
+		this.ads.selectIfDiffirent(this.params.id)
 	}
 
 	selectGuide(gcode){
@@ -50,10 +50,10 @@ export class GuidesComponent implements OnInit {
 }
 
 @Pipe({
-	name: 'filter',
+	name: 'campfilter',
 	pure: false
 })
-export class FilterPipe implements PipeTransform {
+export class CampFilterPipe implements PipeTransform {
 	transform(items: any[], filter: any): any {
 		if (!items || !filter) {
 			return items;

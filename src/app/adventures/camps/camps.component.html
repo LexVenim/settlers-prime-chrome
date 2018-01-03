@@ -50,7 +50,7 @@
 				Locked
 			</div>
 		</div>
-		<div class="map container center-content">
+		<div class="map container center-content" *ngIf="!params.parent">
 			<div class="center-content">
 				<img src="{{ads.adventure.info.map}}">
 			</div>
@@ -63,42 +63,61 @@
 		</div>
 	</div>
 	<div class="info">
-		<div *ngFor="let sector of ss.sectors">
-			<div *ngIf="sector.adventure == ads.adventure.code">
-				<div class="container header center-content c-secondary">
-					<div class="background bc-secondary o-75"></div>
-					<div class="content">
-						<div class="icon center-content">
-							<img src="../../assets/icons/area.png">
-						</div>
-						<div class="name center-content">
-							Sector #{{sector.order}}
+		<div class="list">
+			<div class="container camp custom center-content c-primary" *ngIf="params.parent">
+				<div class="background bc-primary o-75"></div>
+				<div class="content">
+					<div class="icon center-content">
+						<img src="../../assets/icons/swords.png">
+					</div>
+					<div class="name center-content">
+						Custom Battle
+					</div>
+					<div class="button container" (click)="selectCustom()">
+						<div class="background bc-negative o-75"></div>
+						<div class="center-content c-secondary">
+							Fight!
 						</div>
 					</div>
-				</div>
+				</div>						
+			</div>
+			<div *ngFor="let sector of ss.sectors | sectorfilter: cs.camps">
+				<div *ngIf="sector.adventure == ads.adventure.code">
+					<div class="container header center-content c-secondary">
+						<div class="background bc-secondary o-75"></div>
+						<div class="content">
+							<div class="icon center-content">
+								<img src="../../assets/icons/area.png">
+							</div>
+							<div class="name center-content">
+								Sector #{{sector.order}}
+							</div>
+						</div>
+					</div>
 
-				<div class="list">
-					<div *ngFor="let camp of cs.camps">
-						<div class="container camp center-content c-primary" *ngIf="camp.sector == sector.code">
-							<div class="background bc-primary o-75"></div>
-							<div class="content">
-								<div class="icon center-content">
-									<img src="../../assets/icons/tent.png">
-									{{camp.num}}
-								</div>
-								<div class="units center-content">
-									<div class="unit center-content" *ngFor="let unit of camp.enemies">	
-										<img src="{{unit.icon}}">
-										{{unit.amount}}
+					<div>
+						<div *ngFor="let camp of cs.camps">
+							<div class="container camp center-content c-primary" *ngIf="camp.sector == sector.code">
+								<div class="background bc-primary o-75"></div>
+								<div class="content">
+									<div class="icon center-content">
+										<img src="../../assets/icons/tent.png">
+										{{camp.num}}
 									</div>
-								</div>
-								<div class="button container" (click)="selectCamp(sector.code, camp.code)">
-									<div class="background bc-negative o-75"></div>
-									<div class="center-content c-secondary">
-										Fight!
+									<div class="units center-content">
+										<div class="unit center-content" *ngFor="let unit of camp.enemies">	
+											<img src="{{unit.icon}}">
+											{{unit.amount}}
+										</div>
 									</div>
-								</div>
-							</div>						
+									<div class="button container" (click)="selectCamp(sector.code, camp.code)">
+										<div class="background bc-negative o-75"></div>
+										<div class="center-content c-secondary">
+											Fight!
+										</div>
+									</div>
+								</div>						
+							</div>
 						</div>
 					</div>
 				</div>

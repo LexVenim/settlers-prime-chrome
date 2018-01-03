@@ -78,7 +78,7 @@
 							<div class="amount center-content">
 								{{u.amount}}
 							</div>
-							<div class="amount center-content c-negative" *ngFor="let c of guide.casualties | filter: u">
+							<div class="amount center-content c-negative" *ngFor="let c of guide.casualties | campfilter: u">
 								{{c.amount}}
 							</div>
 						</div>

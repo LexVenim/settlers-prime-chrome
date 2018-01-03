@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { BackendService } from '../../services/backend/backend.service';
@@ -36,7 +36,7 @@ export class CampsComponent implements OnInit {
 		this.bs.clean()
 		this.cache.remove('settlersprime-battle-camp')
 
-		this.ads.selectIfEmpty(this.params.id)
+		this.ads.selectIfDiffirent(this.params.id)
 	}
 
 	selectCamp(sector, camp){
@@ -49,7 +49,26 @@ export class CampsComponent implements OnInit {
 		this.router.go(["adventures", this.params.id, page])
 	}
 
+	selectCustom(){
+		this.router.go(["battle", "enemies"])
+	}
+
 	toggleZoom(){
     this.zoomed = !this.zoomed
   }
+}
+
+@Pipe({
+	name: 'sectorfilter',
+	pure: false
+})
+export class SectorFilterPipe implements PipeTransform {
+	transform(items: any[], filter: any): any {
+		if (!items || !filter) {
+			return items;
+		}
+
+		console.log(items)
+		return items.filter(item => filter.filter(c => c.sector == item.code).length > 0);
+	}
 }
