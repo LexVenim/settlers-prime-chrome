@@ -61,10 +61,10 @@ export class SpecialistService {
 		})
 	}
 
-	public loadIfEmpty(){
+	public loadGeneralsIfEmpty(){
 		return new Promise((resolve, reject) => {
-			if(this.specialists.length == 0)
-				this.loadCache().then(() => resolve())
+			if(this.specialists.filter(s => s.category == "general").length == 0)
+				this.loadGenerals().then(() => resolve())
 			else
 				resolve()
 		})

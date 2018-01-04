@@ -22,7 +22,7 @@ export class BattleHomeComponent implements OnInit {
 		{page: "archipelago", icon: "../../assets/icons/tower.png", name: "Archipelago"},
 
 		{page: "adventures", icon: "../../assets/icons/catapult.png", name: "Adventures"},
-		{page: "colonies", icon: "../../assets/icons/ship.png", name: "Colonies", lock: true}
+		{page: "colonies", icon: "../../assets/icons/ship.png", name: "Colonies"}
   ]
 
   constructor(public progress: ProgressService,
@@ -38,6 +38,7 @@ export class BattleHomeComponent implements OnInit {
 
   ngOnInit() {
   	this.bs.clean()
+  	this.cache.remove("settlersprime-battle-units")
   }
 
   select(page){
@@ -60,7 +61,7 @@ export class BattleHomeComponent implements OnInit {
 			case "colonies":
 				this.sps.load('marshal').then(() => {
 					this.bs.selectMode("colony")
-					this.cache.set('settlersprime-battle-mode', "colonies")
+					this.cache.set('settlersprime-battle-mode', "colony")
 					this.router.go(["battle", "enemies"])
 				})
 				break;

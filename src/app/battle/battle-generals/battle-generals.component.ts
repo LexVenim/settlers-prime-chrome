@@ -24,7 +24,7 @@ export class BattleGeneralsComponent implements OnInit {
 		public sps: SpecialistService) { }
 
 	ngOnInit() {
-		this.sps.loadIfEmpty().then(() => 
+		this.sps.loadGeneralsIfEmpty().then(() => 
 			this.cache.get("settlersprime-battle-general").then((general : any) => {
 				this.units = this.sps.getGenerals()
 				this.general = general ? general : "normalgeneral"

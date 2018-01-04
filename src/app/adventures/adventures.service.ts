@@ -52,7 +52,7 @@ export class AdventuresService {
 					this.progress.set('Gathering up troops...')
 					this.sls.loadIfEmpty().then(() => {
 						this.progress.set('Hiring specialists...')
-						this.sps.loadIfEmpty().then(() => {
+						this.sps.loadGeneralsIfEmpty().then(() => {
 							this.progress.set('Mapping the camps...')
 							this.ss.loadAdventure(aCode).then(() => {
 								this.progress.set('Looking for guidance...')

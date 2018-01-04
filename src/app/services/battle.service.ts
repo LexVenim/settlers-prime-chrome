@@ -32,8 +32,10 @@ export class BattleService {
     this.general = null
     if(mode == "adventure")
       this.selectGeneral("normalgeneral")
-    else
-      this.selectGeneral("marshal")
+    else{
+      let marshal = this.sps.get("marshal")
+      marshal ? this.general = marshal : this.sps.load('marshal').then(() => this.selectGeneral("marshal"))
+    }
   }
 
   public simulateBattle(adventure){

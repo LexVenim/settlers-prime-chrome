@@ -27,26 +27,37 @@ export class BattleEnemiesComponent implements OnInit {
 		public es: EnemyService) { }
 
 	ngOnInit() {
-		this.cache.get('settlersprime-adventure').then(adventure => 
-			this.ads.selectIfDiffirent(adventure).then(() =>
-				this.cache.get('settlersprime-battle-units').then((units : any) => {
-					let promises = []
-					let camp = null
+		this.cache.get('settlersprime-battle-units').then((units : any) =>
+			this.cache.get('settlersprime-battle-mode').then(mode => {
+				if(!mode || mode == "adventure") {
+					this.cache.get('settlersprime-adventure').then(adventure => 
+						this.ads.selectIfDiffirent(adventure).then(() => {
+							let promises = []
+							let camp = null
 
-					if(!units)
-						promises.push(new Promise((resolve, reject) => this.cache.get('settlersprime-battle-camp').then(camp => resolve(camp))))
+							if(!units)
+								promises.push(new Promise((resolve, reject) => this.cache.get('settlersprime-battle-camp').then(camp => resolve(camp))))
 
-					Promise.all(promises).then((camp : any) => {
-						if(this.bs.enemies.length == 0)
-							this.bs.enemies = units ? units.enemies : (camp[0] ? this.cs.camps.find(c => c.code == camp[0].camp).enemies : [])
+							Promise.all(promises).then((camp : any) => {
+								if(this.bs.enemies.length == 0)
+									this.bs.enemies = units ? units.enemies : (camp[0] ? this.cs.camps.find(c => c.code == camp[0].camp).enemies : [])
 
-						this.units = this.es.enemies.map(e => {
-							let bse = this.bs.enemies.find(be => be.code == e.code)
-							e.amount = bse ? bse.amount : 0;
-							return e
-						})
-					})				
-				})))
+								this.units = this.es.enemies.map(e => {
+									let bse = this.bs.enemies.find(be => be.code == e.code)
+									e.amount = bse ? bse.amount : 0;
+									return e
+								})
+							})
+						}))
+				}
+				else {
+					this.bs.selectMode('colony')
+					if(units && units.enemies.length > 0)
+						this.units = this.bs.enemies = units.enemies
+					else
+						this.backend.getItems("exp_enemies").then((enemies : Array<any>) => this.units = this.bs.enemies = enemies.map(e => {e.amount = 0; return e }) )
+				}
+			}))
 	}
 
 	empty(){
@@ -56,8 +67,15 @@ export class BattleEnemiesComponent implements OnInit {
 	next(){
 		if(!this.empty()) {
 			this.bs.enemies = this.units
-			this.cache.set('settlersprime-battle-units', {enemies: this.bs.enemies, soldiers: this.bs.soldiers})
-			this.router.go(["battle", "soldiers"])
+			if(this.bs.mode == "adventure") {
+				this.cache.set('settlersprime-battle-units', {enemies: this.bs.enemies, soldiers: this.bs.soldiers})
+				this.router.go(["battle", "soldiers"])
+			}
+			else
+			{
+				this.cache.set('settlersprime-battle-units', {enemies: this.bs.enemies, soldiers: []})
+				this.router.go(["battle", "preview"])
+			}
 		}
 	}
 }

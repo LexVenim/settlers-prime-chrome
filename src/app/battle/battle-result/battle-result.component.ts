@@ -36,7 +36,7 @@ export class BattleResultComponent implements OnInit {
 	}
 
 	showLog(){
-		this.battle.mode == "adventure" ? this.router.go(["battle", "log"]) : this.router.go(["battle","colony"])
+		this.router.go(["battle", "log"])
 	}
 
 }

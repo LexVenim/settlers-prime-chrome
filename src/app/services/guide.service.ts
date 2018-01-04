@@ -27,6 +27,10 @@ export class GuideService {
 				this.guides = guides.map(guide => {
 					guide.generals = guide.generals.map(gen => {
 						let general = this.sps.specialists.find(g => g.code == gen.code)
+						if(!general){
+							console.log(gen)
+							console.log(this.sps.specialists)
+						}
 						gen.icon = general.icon
 						gen.name = general.name
 						gen.order = general.order

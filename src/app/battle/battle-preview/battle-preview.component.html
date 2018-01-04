@@ -17,7 +17,7 @@
 
 		<div class="units container">
 			<div class="bc-primary o-75"></div>
-			<div class="content center-content">
+			<div class="content center-content"  *ngIf="bs.mode == 'adventure'">
 				<div *ngFor="let unit of bs.soldiers">
 					<div class="unit center-content c-primary" *ngIf="unit.amount > 0">
 						<div class="icon center-content">	
@@ -28,6 +28,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="content content-big center-content c-primary" *ngIf="bs.mode != 'adventure'">
+				Will be calculated
 			</div>
 		</div>
 
