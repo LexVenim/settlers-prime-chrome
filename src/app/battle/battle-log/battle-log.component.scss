@@ -1,96 +1,105 @@
 .log {
-  height: 310px;
+  height: 320px;
   overflow: hidden;
   font-family: Breakable;
   .log-attacks {
-    height: 220px;
-    overflow: hidden;
-    .log-attacks-wrapper {
-      height: 200px;
-      width: 315px;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
+    height: 210px;
+    overflow: auto;
     .attack {
+      display: grid;
+      grid-template-columns: 5fr 1fr 5fr;
+      grid-gap: 5px;
       margin: 5px;
-      .attack-header {
+      margin-bottom: 10px;
+      .arrow {
+        grid-column: 2;
+        font-size: 24px;
+      }
+      .unit {
         height: 30px;
-        font-size: 18px;
+        font-size: 16px;
         > div {
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
+          border-radius: 10px;
         }
-        .attack-header-content {
+        .content {
           display: grid;
           grid-template-columns: 1fr 1fr 3fr 1fr;
-          .attack-unit-icon img {
+          .unit-icon img {
             height: 30px;
           }
-          .attack-icon img {
+          .icon img {
             height: 18px;
           }
         }
       }
-      .attack-blows .attack-blow {
-        height: 25px;
-        font-size: 16px;
-        &:last-of-type > div {
-          border-bottom-left-radius: 10px;
-          border-bottom-right-radius: 10px;
-        }
-        .attack-blow-content {
-          display: grid;
-          grid-template-columns: 1fr 1fr 3fr 1fr;
-          .blow-unit-icon img {
-            height: 30px;
-          }
-          .blow-icon img {
-            height: 18px;
-          }
-        }
+      .unit.blow {
+        grid-column: 3;
       }
     }
   }
   .log-casualties {
-    height: 195px;
-    font-size: 20px;
-    .log-casualties-content {
-      display: grid;
-      .log-casualties-header {
-        height: 30px;
+    height: 200px;
+    margin: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 4fr;
+    grid-gap: 5px;
+    .header {
+      font-size: 20px;
+      > div {
+        border-radius: 5px;
       }
-      .log-casualties-side {
-        height: 67px;
-        width: 220px;
-        display: flex;
-        border-bottom: 2px solid dimgrey;
-        .log-casualties-unit {
-          font-size: 18px;
-          margin: 0 1px;
-          img {
-            height: 35px;
-          }
+    }
+    .side {
+      display: flex;
+      > div {
+        border-radius: 5px;
+      }
+      .unit {
+        font-size: 20px;
+        margin: 0 1px;
+        display: grid;
+        grid-template-rows: 2fr 1fr;
+        height: 70px;
+        .icon img {
+          height: 35px;
         }
       }
+    }
+    .side.side-big {
+      font-size: 30px;
     }
   }
   .log-header {
     height: 105px;
+    width: 98%;
+    margin: 0 1%;
     .log-spin {
       height: 30px;
       margin: 5px 0;
       font-size: 18px;
+      > div {
+        border-radius: 5px;
+      }
       .log-spin-content {
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         .log-spin-left {
           grid-column: 1;
+          &:hover {
+            cursor: pointer;
+            color: red;
+          }
         }
         .log-spin-center {
           grid-column: 2;
         }
         .log-spin-right {
           grid-column: 3;
+          &:hover {
+            cursor: pointer;
+            color: red;
+          }
         }
       }
     }

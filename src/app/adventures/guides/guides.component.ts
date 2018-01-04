@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { CacheService } from '../../services/cache.service';
@@ -7,6 +7,8 @@ import { RoutingService } from '../../services/routing.service';
 
 import { AdventuresService } from '../adventures.service';
 import { GuideService } from '../../services/guide.service';
+
+import { CampFilterPipe }  from '../../common/pipes';
 
 @Component({
 	selector: 'app-guides',
@@ -45,18 +47,4 @@ export class GuidesComponent implements OnInit {
 		this.zoomed = !this.zoomed
 	}
 
-}
-
-@Pipe({
-	name: 'campfilter',
-	pure: false
-})
-export class CampFilterPipe implements PipeTransform {
-	transform(items: any[], filter: any): any {
-		if (!items || !filter) {
-			return items;
-		}
-
-		return items.filter(item => item.code == filter.code);
-	}
 }

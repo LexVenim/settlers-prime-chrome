@@ -6,7 +6,6 @@ import { RoutingService } from '../../services/routing.service';
 
 import { BattleService } from '../../services/battle.service';
 
-
 @Component({
 	selector: 'app-battle-result',
 	templateUrl: './battle-result.component.html',
@@ -22,6 +21,7 @@ export class BattleResultComponent implements OnInit {
 		public battle: BattleService) { }
 
 	ngOnInit() {
+		this.progress.set("Making a report...")
 		if(!this.battle.log || this.battle.soldiers.length == 0)
 			this.cache.get('settlersprime-battle-log').then(log => {
 				this.battle.log = log

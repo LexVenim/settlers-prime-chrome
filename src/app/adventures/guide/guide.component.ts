@@ -12,6 +12,8 @@ import { GuideService } from '../../services/guide.service';
 import { CampService } from '../../services/camp.service';
 import { SectorService } from '../../services/sector.service';
 
+import { CampFilterPipe }  from '../../common/pipes';
+
 @Component({
   selector: 'app-guide',
   templateUrl: './guide.component.html',

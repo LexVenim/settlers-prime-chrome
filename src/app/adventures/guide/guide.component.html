@@ -63,6 +63,27 @@
 		</div>
 	</div>
 	<div class="info">
+		<div class="container guide center-content c-primary">
+			<div class="background bc-primary o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="{{gs.guide.generals[0].icon}}">
+				</div>
+				<div class="units center-content">
+					<div class="unit center-content c-positive" *ngFor="let u of gs.guide.units">	
+						<div class="icon">
+							<img src="{{u.icon}}">
+						</div>
+						<div class="amount center-content">
+							{{u.amount}}
+						</div>
+						<div class="amount center-content c-negative" *ngFor="let c of gs.guide.casualties | campfilter: u">
+							{{c.amount}}
+						</div>
+					</div>
+				</div>			
+			</div>
+		</div>
 		<div class="list">
 			<div *ngFor="let camp of gs.guide.camps">
 				<div class="container camp center-content c-primary">
@@ -88,7 +109,7 @@
 				</div>
 				<div class="waves">
 					<div *ngFor="let wave of camp.waves">
-					<div class="container camp wave center-content c-secondary">
+						<div class="container camp wave center-content c-secondary">
 							<div class="background bc-secondary o-75"></div>
 							<div class="content">
 								<div class="icon center-content">

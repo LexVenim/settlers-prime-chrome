@@ -12,6 +12,14 @@
       font-size: 20px;
     }
   }
+  .footer.log {
+    &:hover {
+      cursor: pointer;
+      .background {
+        background-color: seagreen;
+      }
+    }
+  }
   .result-center {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

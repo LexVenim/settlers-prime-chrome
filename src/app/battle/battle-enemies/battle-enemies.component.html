@@ -18,9 +18,9 @@
 		</div>
 	</div>
 	<div class="footer container" (click)="next()">
-		<div class="background bc-ternary o-75"></div>
+		<div class="background bc-ternary o-75" [ngClass]="{'bc-positive': !empty()}"></div>
 		<div class="content center-content c-secondary">
-			Next
+			{{empty() ? "Select enemies!" : "Next"}}
 		</div>
 	</div>
 </div>

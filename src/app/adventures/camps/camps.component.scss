@@ -8,25 +8,31 @@
   font-family: Breakable;
 
   .info {
-    overflow: auto;
-    .header {
-      height: 30px;
-      margin-bottom: 5px;
+    display: grid;
+    grid-template-rows: 1fr 15fr;
+    
+    .top-header {
+      height: 40px;
+      margin: 1%;
+      > div {
+        border-radius: 5px;
+      }
       .content {
         display: grid;
-        grid-template-columns: 1fr 10fr;
+        grid-template-columns: 1fr 6fr;
         .icon img {
-          height: 20px;
+          height: 30px;
         }
         .name {
-          font-size: 20px;
+          font-size: 22px;
         }
       }
     }
-
     .list {
+      overflow: auto;
       width: 98%;
       margin: 0 1% 5px 1%;
+      max-height: 265px;
       .camp {
         height: 60px;
         margin: 5px 0;
@@ -35,6 +41,12 @@
         }
         .button {
           font-size: 16px;
+          &:hover {
+            cursor: pointer;
+            > div {
+              color: yellow;
+            }
+          }
           > div {
             border-radius: 5px;
             width: 90%;
@@ -64,11 +76,28 @@
           }
         }
       }
-    }
-    .camp.custom {
-      height: 50px;
-      .content {
-        font-size: 24px;
+      .camp.custom {
+        height: 50px;
+        .content {
+          font-size: 24px;
+        }
+      }
+      .header {
+        height: 30px;
+        margin-bottom: 5px;
+        > div {
+          border-radius: 5px;
+        }
+        .content {
+          display: grid;
+          grid-template-columns: 1fr 6fr;
+          .icon img {
+            height: 20px;
+          }
+          .name {
+            font-size: 20px;
+          }
+        }
       }
     }
   }
@@ -78,6 +107,7 @@
   display: grid;
   grid-template-rows: 5fr repeat(3, 1fr) 4fr;
   grid-gap: 5px;
+  height: 320px;
   > div {
     border-radius: 5px;
   }
@@ -94,10 +124,15 @@
     }
   }
   .side-item {
+    &:hover {
+      cursor: pointer;
+      .content {
+        color: red;
+      }
+    }
     .content {
       display: grid;
       grid-template-columns: 2fr 5fr;
-      border-top: 1px dotted;
       .icon  img {
         height: 20px;
       }

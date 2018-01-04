@@ -21,6 +21,7 @@ import { firebaseConfig } 						from './common/firebase.config';
 import { BackendService } from './services/backend/backend.service';
 import { AsyncHttpManager } from './services/backend/async_http.manager';
 
+
 import { AuthService } from './services/auth.service';
 import { BattleService } from './services/battle.service';
 import { BuffService } from './services/buff.service';

@@ -1,8 +1,16 @@
 .login {
   font-family: Breakable;
-  height: 310px;
+  height: 280px;
+  width: 400px;
+  margin: 20px 50px;
+  > div {
+    border-radius: 15px;
+  }
+  .content {
+    display: grid;
+    grid-template-rows: 2fr 4fr 1fr 2fr;
+  }
   .login-google {
-    height: 40px;
     font-size: 16px;
     margin-top: 10px;
     .google-btn {
@@ -15,18 +23,21 @@
       > i {
         margin-right: 5px;
       }
+      &:hover {
+        cursor: pointer;
+        border: 3px solid;
+      }
     }
   }
   .login-header {
-    height: 50px;
     font-size: 30px;
+    color: #d21f1f;
   }
   .login-separator {
-    height: 20px;
+    margin-top: 10px;
     font-size: 20px;
   }
   form {
-    height: 180px;
     > input {
       box-sizing: border-box;
       outline: none;
@@ -40,7 +51,7 @@
       font-family: Breakable;
       font-size: 16px;
       height: 35px;
-      color: darkgray;
+      color: #d21f1f;
       font-weight: bold;
     }
     .login-help {
@@ -51,7 +62,6 @@
       margin-left: 50px;
     }
     .login-sign {
-      height: 40px;
       font-size: 20px;
       .sign-btn {
         height: 40px;
@@ -61,6 +71,10 @@
         border: 2px solid;
         i {
           margin-right: 3px;
+        }
+        &:hover {
+          cursor: pointer;
+          border: 3px solid;
         }
       }
     }

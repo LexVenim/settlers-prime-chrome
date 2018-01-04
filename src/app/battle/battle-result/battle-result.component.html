@@ -16,7 +16,7 @@
 
 		<div class="units container center-content" *ngIf="battle.log[battle.log.length - 1].won">
 			<div class="bc-primary o-75"></div>
-			<div class="content center-content">
+			<div class="content center-content" *ngIf="battle.log[battle.log.length - 1].casualties.length > 0">
 				<div *ngFor="let unit of battle.log[battle.log.length - 1].casualties">
 					<div class="unit center-content c-primary" *ngIf="unit.amount > 0">
 						<div class="icon center-content">	
@@ -27,6 +27,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="content content-big center-content c-primary" *ngIf="battle.log[battle.log.length - 1].casualties.length == 0">
+				NONE
 			</div>
 		</div>
 
@@ -77,7 +80,7 @@
 		</div>
 	</div>
 
-	<div class="footer container" (click)="showLog()">
+	<div class="footer log container" (click)="showLog()">
 		<div class="background bc-ternary o-75"></div>
 		<div class="content center-content c-secondary">
 			Show Log

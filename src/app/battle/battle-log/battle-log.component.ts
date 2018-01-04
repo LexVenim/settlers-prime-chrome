@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BattleService } from '../../services/battle.service';
+import { CacheService } from '../../services/cache.service';
+import { ProgressService } from '../../services/progress.service';
 import { RoutingService } from '../../services/routing.service';
 
+import { BattleService } from '../../services/battle.service';
 
 @Component({
   selector: 'app-battle-log',
@@ -23,11 +25,25 @@ export class BattleLogComponent implements OnInit {
 		}
 	}
 
-	constructor(public battle: BattleService,
-		private router: RoutingService) { }
+	constructor(public progress: ProgressService,
+
+		private cache: CacheService,    
+		private router: RoutingService,
+
+		public battle: BattleService) { }
 
 	ngOnInit() {
-		this.loadPhase()
+		this.progress.set("Making a report...")
+		if(!this.battle.log)
+			this.cache.get('settlersprime-battle-log').then(log => {
+				this.battle.log = log
+				this.loadPhase()
+				this.progress.unset()
+			})
+		else{
+			this.loadPhase()
+			this.progress.unset()
+		}		
 	}
 
 	previousRound(){

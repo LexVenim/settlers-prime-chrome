@@ -8,6 +8,9 @@
   font-family: Breakable;
 
   .footer {
+    &:hover {
+      cursor: pointer;
+    }
     .content {
       font-size: 20px;
     }

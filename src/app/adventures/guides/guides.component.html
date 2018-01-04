@@ -63,41 +63,54 @@
 		</div>
 	</div>
 	<div class="info">
-		<div *ngFor="let guide of gs.guides">
-			<div class="container guide center-content c-primary" (click)="selectGuide(guide.code)">
-				<div class="background bc-primary o-75"></div>
-				<div class="content">
-					<div class="icon center-content">
-						<img src="{{guide.generals[0].icon}}">
-					</div>
-					<div class="units center-content">
-						<div class="unit center-content c-positive" *ngFor="let u of guide.units">	
-							<div class="icon">
-								<img src="{{u.icon}}">
-							</div>
-							<div class="amount center-content">
-								{{u.amount}}
-							</div>
-							<div class="amount center-content c-negative" *ngFor="let c of guide.casualties | campfilter: u">
-								{{c.amount}}
-							</div>
+		<div class="container top-header center-content c-secondary">
+			<div class="background bc-sky o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="../../assets/icons/ship.png">
+				</div>
+				<div class="name center-content">
+					Guides
+				</div>
+			</div>
+		</div>
+		<div class="list">
+			<div *ngFor="let guide of gs.guides">
+				<div class="container guide center-content c-primary" (click)="selectGuide(guide.code)">
+					<div class="background bc-primary o-75"></div>
+					<div class="content">
+						<div class="icon center-content">
+							<img src="{{guide.generals[0].icon}}">
 						</div>
-					</div>			
+						<div class="units center-content">
+							<div class="unit center-content c-positive" *ngFor="let u of guide.units">	
+								<div class="icon">
+									<img src="{{u.icon}}">
+								</div>
+								<div class="amount center-content">
+									{{u.amount}}
+								</div>
+								<div class="amount center-content c-negative" *ngFor="let c of guide.casualties | campfilter: u">
+									{{c.amount}}
+								</div>
+							</div>
+						</div>			
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="map map-big container center-content" *ngIf="!progress.message && gs.guides && zoomed">
-		<div class="wrapper">
-			<div>
-				<img src="{{ads.adventure.info.map}}">
-			</div>
+</div>
+<div class="map map-big container center-content" *ngIf="!progress.message && gs.guides && zoomed">
+	<div class="wrapper">
+		<div>
+			<img src="{{ads.adventure.info.map}}">
 		</div>
-		<div class="zoom container" (click)="toggleZoom()">
-			<div class="background bc-positive o-75"></div>
-			<div class="content c-secondary center-content">
-				<i class="fa fa-search-minus"></i>
-			</div>
+	</div>
+	<div class="zoom container" (click)="toggleZoom()">
+		<div class="background bc-positive o-75"></div>
+		<div class="content c-secondary center-content">
+			<i class="fa fa-search-minus"></i>
 		</div>
 	</div>
 </div>

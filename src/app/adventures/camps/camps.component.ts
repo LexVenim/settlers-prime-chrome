@@ -11,6 +11,8 @@ import { BattleService } from '../../services/battle.service';
 import { CampService } from '../../services/camp.service';
 import { SectorService } from '../../services/sector.service';
 
+import { SectorFilterPipe }  from '../../common/pipes';
+
 @Component({
 	selector: 'app-camps',
 	templateUrl: './camps.component.html',
@@ -58,18 +60,4 @@ export class CampsComponent implements OnInit {
 	toggleZoom(){
     this.zoomed = !this.zoomed
   }
-}
-
-@Pipe({
-	name: 'sectorfilter',
-	pure: false
-})
-export class SectorFilterPipe implements PipeTransform {
-	transform(items: any[], filter: any): any {
-		if (!items || !filter) {
-			return items;
-		}
-
-		return items.filter(item => filter.filter(c => c.sector == item.code).length > 0);
-	}
 }

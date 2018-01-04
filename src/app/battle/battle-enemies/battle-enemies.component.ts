@@ -49,8 +49,12 @@ export class BattleEnemiesComponent implements OnInit {
 				})))
 	}
 
+	empty(){
+		return this.units.filter(u => u.amount != 0).length == 0
+	}
+
 	next(){
-		if(this.units.filter(u => u.amount != 0).length > 0) {
+		if(!this.empty()) {
 			this.bs.enemies = this.units
 			this.cache.set('settlersprime-battle-units', {enemies: this.bs.enemies, soldiers: this.bs.soldiers})
 			this.router.go(["battle", "soldiers"])
