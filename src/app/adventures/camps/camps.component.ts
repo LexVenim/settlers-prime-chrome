@@ -44,7 +44,6 @@ export class CampsComponent implements OnInit {
 	}
 
 	selectCamp(sector, camp){
-		this.bs.selectCamp(camp)
 		this.cache.set('settlersprime-battle-camp', {sector: sector, camp: camp})
 		this.router.go(["battle", "enemies"])
 	}

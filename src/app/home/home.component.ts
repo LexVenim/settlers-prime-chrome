@@ -39,14 +39,14 @@ export class HomeComponent implements OnInit {
     let item = this.menu.find(i => i.page == page)
     if(!item.lock){
       if(!item.auth || this.isLoggedIn())
-        this.router.go(['/' + page])
+        this.router.go([page])
       else
         this.login()
     }
   }
 
   login(){
-    this.router.go(["/login"])
+    this.router.go(["login"])
   }
 
   isLoggedIn(){

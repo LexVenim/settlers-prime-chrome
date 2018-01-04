@@ -29,7 +29,7 @@ export class BattlePreviewComponent implements OnInit {
     this.cache.get('settlersprime-adventure').then(adventure =>
       this.ads.selectIfDiffirent(adventure).then(() =>
         this.cache.get('settlersprime-battle-mode').then(mode => {
-          if(this.bs.mode != mode)
+          if(mode && this.bs.mode != mode)
             this.bs.selectMode(mode)
           this.cache.get('settlersprime-battle-units').then((units : any) => {
             if(this.bs.enemies.length == 0)

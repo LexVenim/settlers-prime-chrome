@@ -38,9 +38,6 @@ export class BattleHomeComponent implements OnInit {
 
   ngOnInit() {
   	this.bs.clean()
-
-    this.cache.remove('settlersprime-battle-mode')
-		this.cache.remove('settlersprime-adventure')
   }
 
   select(page){
