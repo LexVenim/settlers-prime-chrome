@@ -9,6 +9,8 @@ import { BattleLogComponent }       from './battle-log/battle-log.component';
 import { BattlePreviewComponent }   from './battle-preview/battle-preview.component';
 import { BattleResultComponent }    from './battle-result/battle-result.component';
 import { BattleSoldiersComponent }  from './battle-soldiers/battle-soldiers.component';
+import { ColonyBattleLogComponent } from './colony-battle-log/colony-battle-log.component';
+import { ColonyBattleResultComponent } from './colony-battle-result/colony-battle-result.component';
 
 import { BattleService }            from './battle.service';
 
@@ -28,7 +30,9 @@ import { BattleRoutesModule }             from './battle.routes';
     BattleLogComponent,
     BattlePreviewComponent,
     BattleResultComponent,
-    BattleSoldiersComponent
+    BattleSoldiersComponent,
+    ColonyBattleLogComponent,
+    ColonyBattleResultComponent    
   ],
   providers: [ BattleService ]
 })

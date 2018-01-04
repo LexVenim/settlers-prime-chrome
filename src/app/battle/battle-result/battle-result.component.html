@@ -1,4 +1,4 @@
-<div class="result">
+<div class="result" *ngIf="!progress.message && battle.log">
 	<div class="result-center">
 		<div class="header container">
 			<div class="bc-secondary o-75"></div>
@@ -87,9 +87,9 @@
 		</div>
 	</div>
 </div>
-<div class="loading container" *ngIf="!battle.log">
+<div class="loading container" *ngIf="progress.message || !battle.log">
 	<div class="bc-primary o-75"></div>
 	<div class="center-content c-primary">
-		Loading...
+		{{progress.message}}
 	</div>
 </div>

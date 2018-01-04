@@ -1,0 +1,95 @@
+.log {
+  height: 320px;
+  overflow: hidden;
+  font-family: Breakable;
+  .log-attacks {
+    height: 245px;
+    overflow: auto;
+    .attack {
+      display: grid;
+      grid-template-columns: 5fr 1fr 5fr;
+      grid-gap: 5px;
+      margin: 5px;
+      margin-bottom: 10px;
+      .arrow {
+        grid-column: 2;
+        font-size: 24px;
+      }
+      .unit {
+        height: 30px;
+        width: 80%;
+        font-size: 16px;
+        margin-left: 20%;
+        > div {
+          border-radius: 10px;
+        }
+        .content {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          .unit-icon img {
+            height: 30px;
+          }
+          .icon img {
+            height: 18px;
+          }
+        }
+      }
+      .unit.blow {
+        grid-column: 3;
+        margin-left: unset;
+      }
+    }
+  }
+  .log-casualties {
+    height: 160px;
+    font-size: 20px;
+    width: 450px;
+    margin: 40px 25px;
+    > div {
+      border-radius: 20px;
+    }
+    .content {
+      display: grid;
+      .side {
+        width: 220px;
+        display: flex;
+        img {
+          height: 40px;
+        }
+      }
+    }
+  }
+  .log-header {
+    width: 98%;
+    margin: 0 1%;
+    .log-spin {
+      height: 30px;
+      margin: 5px 0;
+      font-size: 18px;
+      > div {
+        border-radius: 5px;
+      }
+      .log-spin-content {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        .log-spin-left {
+          grid-column: 1;
+          &:hover {
+            cursor: pointer;
+            color: red;
+          }
+        }
+        .log-spin-center {
+          grid-column: 2;
+        }
+        .log-spin-right {
+          grid-column: 3;
+          &:hover {
+            cursor: pointer;
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}

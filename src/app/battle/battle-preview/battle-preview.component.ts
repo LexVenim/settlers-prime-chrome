@@ -49,7 +49,7 @@ export class BattlePreviewComponent implements OnInit {
     this.progress.set("Fighting in progress...")
     this.bs.simulateBattle(this.ads.adventure.code).then(() => {
       this.cache.set('settlersprime-battle-log', this.bs.log)
-      this.bs.mode == "adventure" ? this.router.go(["battle", "result"]) : this.router.go(["battle", "colonyresult"])
+      this.bs.mode == "adventure" ? this.router.go(["battle", "result"]) : this.router.go(["battle", "colony", "result"])
     })
   }
 }

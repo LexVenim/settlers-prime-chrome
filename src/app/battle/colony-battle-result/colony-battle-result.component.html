@@ -1,0 +1,63 @@
+<div class="result" *ngIf="!progress.message && battle.log">
+	<div class="result-center">
+		<div class="header container">
+			<div class="bc-secondary o-75"></div>
+			<div class="content center-content c-secondary">
+				Units Required
+			</div>
+		</div>
+
+		<div class="header container">
+			<div class="bc-secondary o-75"></div>
+			<div class="content center-content c-secondary">
+				Calculated Losses
+			</div>
+		</div>
+
+		<div class="units container center-content">
+			<div class="bc-primary o-75"></div>
+			<div class="content center-content">
+				<div *ngFor="let unit of battle.log.soldiers">
+					<div class="unit center-content c-primary" *ngIf="unit.amount > 0">
+						<div class="icon center-content">	
+							<img src="{{unit.icon}}">
+						</div>
+						<div class="amount center-content">
+							{{unit.amount}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="units container center-content">
+			<div class="bc-primary o-75"></div>
+			<div class="content center-content">
+				<div *ngFor="let unit of battle.log.soldiers">
+					<div class="unit center-content c-primary" *ngIf="unit.dead > 0">
+						<div class="icon center-content">	
+							<img src="{{unit.icon}}">
+						</div>
+						<div class="amount center-content">
+							{{unit.dead}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="footer log container" (click)="showLog()">
+		<div class="background bc-ternary o-75"></div>
+		<div class="content center-content c-secondary">
+			Show Log
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message || !battle.log">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>
