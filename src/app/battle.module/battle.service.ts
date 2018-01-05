@@ -26,9 +26,9 @@ export class BattleService {
   public simulate(){
     return new Promise((resolve, reject) => {
       let params = {
-        adventure: this.adventure.code,
+        adventure: this.adventure ? this.adventure.code : undefined,
         enemies: this._units.enemies,
-        general: this.general.code,
+        general: this.general ? this.general.code : undefined,
         soldiers: this._units.soldiers
       }
       if(this.mode == "adventure")
