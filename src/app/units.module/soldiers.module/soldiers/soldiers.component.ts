@@ -37,8 +37,19 @@ export class SoldiersComponent implements OnInit {
       this.progress.set("Gathering up troops...")
       this.cache.get('settlersprime-battle-units').then((units : any) => 
         this.cache.get('settlersprime-soldiers').then((soldiers : Array<any>) => {
-          this.units = (units && units.soldiers.length > 0) ? units.soldiers : soldiers.map(s => {s.amount = 0; return s})
-          this.progress.unset()
+          if(units && units.soldiers.length > 0){
+            this.units = units.soldiers
+            this.progress.unset()
+          }
+          else if(soldiers){
+            this.units = soldiers.map(s => {s.amount = 0; return s})
+            this.progress.unset()
+          }
+          else
+            this.sls.load().then((new_soldiers : Array<any>) => {
+              this.units = new_soldiers.map(s => {s.amount = 0; return s})
+              this.progress.unset()
+            })    
         }))
   	}
 	}

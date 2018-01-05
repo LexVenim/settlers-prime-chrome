@@ -33,15 +33,23 @@ export class SpecialistsComponent implements OnInit {
 				this.cache.set("settlersprime-specialists", generals)
 				this.router.go(this.params.pass, {adventure: this.params.adventure})
 			})
-  	}
-  	else {
+		}
+		else {
 			this.progress.set("Hiring specialists...")
-      this.cache.get('settlersprime-battle-general').then((general : any) => 
-        this.cache.get('settlersprime-specialists').then((specialists : Array<any>) => {
-					this.units = specialists
-					this.general = general || this.units.find(g => g.code == "normalgeneral")
-          this.progress.unset()
-        }))
+			this.cache.get('settlersprime-battle-general').then((general : any) => 
+				this.cache.get('settlersprime-specialists').then((specialists : Array<any>) => {
+					if(specialists){
+						this.units = specialists
+						this.general = general || this.units.find(g => g.code == "normalgeneral")
+						this.progress.unset()
+					}
+					else
+						this.sps.load('general').then((generals : Array<any>) => {
+							this.units = generals
+							this.general = general || this.units.find(g => g.code == "normalgeneral")
+							this.progress.unset()
+						})
+				}))
 		}
 	}
 
