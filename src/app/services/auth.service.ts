@@ -11,13 +11,10 @@ import { RoutingService } from './routing.service';
 
 import { BuffService } from './buff.service';
 import { BuildingService } from './building.service';
-import { EnemyService } from './enemy.service';
 import { ResourceService } from './resource.service';
-import { SectorService } from './sector.service';
-// import { SettingsService } from './settings.service';
-import { SoldierService } from './soldier.service';
-import { SpecialistService } from './specialist.service';
 import { UserService } from './user.service';
+
+import { SectorsService }   from '../island.module/sectors.module/sectors.service';
 
 @Injectable()
 export class AuthService {
@@ -36,15 +33,11 @@ export class AuthService {
     
     private bfs: BuffService,
     private bs: BuildingService,
-    private es: EnemyService,
     private rs: ResourceService,
-    private ss: SectorService,
-    public sps: SpecialistService,
-    public sls: SoldierService,
-    // private settings: SettingsService,
+    private ss: SectorsService,
     private us: UserService) 
   {
-    let spVersion = '3.0.2'
+    let spVersion = '3.0.3'
 
     this.progress.set("Loading...")
 
@@ -67,40 +60,6 @@ export class AuthService {
       })
     })
   }
-
-  // private loadCache(){
-  //   return new Promise((resolve, reject) => {
-  //     this.loadServices().then(() => 
-  //       this.router.load().then(() => resolve()))
-  //   })
-  // }
-
-  // private loadServices(){
-  //   return new Promise((resolve, reject) => {
-
-  //     this.progress.set('Loading...')
-  //     this.es.loadCache().then(() => {
-  //       this.progress.set('Acquiring blueprints...')
-  //       this.bs.loadCache().then(() => {
-  //         this.progress.set('Visiting Aunt Irma...')
-  //         this.bfs.loadCache().then(() => {
-  //           this.progress.set('Searching for resources...')
-  //           this.rs.loadCache().then(() => {
-  //             this.progress.set('Drawing maps...')
-  //             this.ss.loadCache().then(() => {
-  //               this.progress.set('Gathering up forces...')
-  //               this.sls.loadCache().then(() => {
-  //                 this.progress.set('Hiring specialists...')
-  //                 this.sps.loadCache().then(() =>
-  //                   resolve())
-  //               })
-  //             })
-  //           })
-  //         })
-  //       })
-  //     })
-  //   })
-  // }
 
   private loadAuthorized(auth){
     this.isLogged = true
@@ -189,26 +148,15 @@ export class AuthService {
 
   createUser(id, data){
     return new Promise((resolve, reject) => {
-
-      this.progress.set('Loading...')
-      this.es.loadCache().then(() => {
-        // this.progress.set('Gathering up forces...')
-        // this.sls.loadCache().then(() => {
-        //   this.progress.set('Hiring specialists...')
-        //   this.sps.loadCache().then(() => {
-          this.progress.set("Conquering sectors...")
-          this.ss.createUser().then(sectors => {
-
-            this.progress.set("Building mayorhouse...")
-            data.buildings = this.bs.createUser()
-            data.sectors = sectors
-
-            this.us.create(id, data).then(() =>
-              resolve())
-          })
-        })
-      //   })
-      // })
+      this.progress.set("Conquering sectors...")
+      this.ss.createUser().then(sectors => {
+        this.progress.set("Building mayorhouse...")
+        data.buildings = this.bs.createUser()
+        data.sectors = sectors
+        
+        this.us.create(id, data).then(() =>
+          resolve())
+      })
     })
   }
 

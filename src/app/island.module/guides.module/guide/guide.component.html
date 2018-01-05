@@ -1,0 +1,129 @@
+<div class="guide" *ngIf="!progress.message && gs.guide && !zoomed">
+	<div class="side-menu">
+		<div class="avatar container">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
+					<img src="{{adventure.icon}}">
+				</div>
+				<div class="name center-content">
+					{{adventure.name}}
+				</div>
+			</div>
+		</div>
+		<div class="side-item container" *ngFor="let item of menu" (click)="go(item)">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
+					<img src="{{item.icon}}">
+				</div>
+				<div class="text center-content">
+					{{item.name}}
+				</div>
+			</div>
+			<div class="locked font18 center-content" *ngIf="item.locked">
+				Locked
+			</div>
+		</div>
+		<div class="map container center-content">
+			<div class="center-content">
+				<img src="{{adventure.info.map}}">
+			</div>
+			<div class="zoom container" (click)="toggleZoom()">
+				<div class="background bc-positive o-75"></div>
+				<div class="content c-secondary center-content">
+					<i class="fa fa-search-plus"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="info">
+		<div class="container guide center-content c-primary">
+			<div class="background bc-primary o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="{{gs.guide.generals[0].icon}}">
+				</div>
+				<div class="units center-content">
+					<div class="unit center-content c-positive" *ngFor="let u of gs.guide.units">	
+						<div class="icon">
+							<img src="{{u.icon}}">
+						</div>
+						<div class="amount center-content">
+							{{u.amount}}
+						</div>
+						<div class="amount center-content c-negative" *ngFor="let c of gs.guide.casualties | campfilter: u">
+							{{c.amount}}
+						</div>
+					</div>
+				</div>			
+			</div>
+		</div>
+		<div class="list">
+			<div *ngFor="let camp of gs.guide.camps">
+				<div class="container camp center-content c-primary">
+					<div class="background bc-primary o-75"></div>
+					<div class="content">
+						<div class="icon center-content">
+							<img src="../../assets/icons/tent.png">
+							{{camp.num}}
+						</div>
+						<div class="units center-content">
+							<div class="unit center-content" *ngFor="let unit of camp.enemies">	
+								<img src="{{unit.icon}}">
+								{{unit.amount}}
+							</div>
+						</div>
+						<div class="button container" (click)="selectCamp(camp)">
+							<div class="background bc-negative o-75"></div>
+							<div class="center-content c-secondary">
+								Fight!
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="waves">
+					<div *ngFor="let wave of camp.waves">
+						<div class="container camp wave center-content c-secondary">
+							<div class="background bc-secondary o-75"></div>
+							<div class="content">
+								<div class="icon center-content">
+									<img src="{{wave.general.icon}}">
+								</div>
+								<div class="units center-content">
+									<div class="unit center-content c-positive" *ngFor="let unit of wave.units">	
+										<div class="icon">
+											<img src="{{unit.icon}}">
+										</div>
+										<div class="amount center-content">
+											{{unit.amount}}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="map map-big container center-content" *ngIf="!progress.message && gs.guide && zoomed">
+	<div class="wrapper">
+		<div>
+			<img src="{{adventure.info.map}}">
+		</div>
+	</div>
+	<div class="zoom container" (click)="toggleZoom()">
+		<div class="background bc-positive o-75"></div>
+		<div class="content c-secondary center-content">
+			<i class="fa fa-search-minus"></i>
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message || !gs.guide">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		Loading...
+	</div>
+</div>

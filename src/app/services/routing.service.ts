@@ -6,7 +6,7 @@ import { CacheService } from './cache.service';
 @Injectable()
 export class RoutingService {
   private loaded = false
-  private tree = [["/home"]]
+  private tree = [["home"]]
 
   constructor(private cache: CacheService,
     private router: Router) { }
@@ -30,10 +30,15 @@ export class RoutingService {
     return this.loaded
   }
 
-  public go(path){
+  public go(...path){
     console.log(path)
     this.tree.push(path)
     this.cache.set("settlersprime-tree", this.tree)
+    this.router.navigate(path)
+  }
+
+  public pass(...path){
+    console.log(path)
     this.router.navigate(path)
   }
 
@@ -46,9 +51,9 @@ export class RoutingService {
   }
 
   public home(){
-    this.tree = [["/home"]]
+    this.tree = [["home"]]
     this.cache.set("settlersprime-tree", this.tree)
-    this.router.navigate(['/home'])
+    this.router.navigate(['home'])
   }
 
   public length(){

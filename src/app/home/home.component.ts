@@ -5,7 +5,6 @@ import { ProgressService } from '../services/progress.service';
 import { RoutingService } from '../services/routing.service';
 import { UserService } from '../services/user.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -39,14 +38,14 @@ export class HomeComponent implements OnInit {
     let item = this.menu.find(i => i.page == page)
     if(!item.lock){
       if(!item.auth || this.isLoggedIn())
-        this.router.go([page])
+        this.router.go(page)
       else
         this.login()
     }
   }
 
   login(){
-    this.router.go(["login"])
+    this.router.go("login")
   }
 
   isLoggedIn(){

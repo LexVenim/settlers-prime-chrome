@@ -23,31 +23,26 @@ import { AsyncHttpManager } from './services/backend/async_http.manager';
 
 
 import { AuthService } from './services/auth.service';
-import { BattleService } from './services/battle.service';
 import { BuffService } from './services/buff.service';
 import { BuildingService } from './services/building.service';
 import { CacheService } from './services/cache.service';
-import { CampService } from './services/camp.service';
-import { EnemyService } from './services/enemy.service';
-import { GuideService } from './services/guide.service';
 import { MineService } from './services/mine.service';
 import { ProgressService } from './services/progress.service';
 import { ResourceService } from './services/resource.service';
 import { RoutingService } from './services/routing.service';
-import { SectorService } from './services/sector.service';
 import { SettingsService } from './services/settings.service';
-import { SoldierService } from './services/soldier.service';
-import { SpecialistService } from './services/specialist.service';
 import { UserService } from './services/user.service';
 
 // Routing
 
 import { AppRoutesModule } 						from './app.routes';
-import { AdventuresModule }           from './adventures/adventures.module';
-import { BattleModule } 							from './battle/battle.module';
-import { EconomyModule } 							from './economy/economy.module';
-import { IslandModule } 							from './island/island.module';
-import { ProfileModule } 							from './profile/profile.module';
+
+import { BattleModule } 							from './battle.module/battle.module';
+import { ColonyModule }               from './colony.module/colony.module';
+import { EconomyModule } 							from './economy.module/economy.module';
+import { IslandModule } 							from './island.module/island.module';
+import { ProfileModule } 							from './profile.module/profile.module';
+import { UnitsModule }                from './units.module/units.module';
 
 import { AuthGuard } 							    from './common/auth.guard';
 
@@ -72,32 +67,26 @@ import { NotFoundComponent }          from './not-found/not-found.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
 
-    AdventuresModule,
     BattleModule,
+    ColonyModule,
     EconomyModule,
     IslandModule,
     ProfileModule,
+    UnitsModule,
 
     AppRoutesModule
   ],
   providers: [
     AuthGuard, 
     AuthService,
-    BattleService,
     BuffService,
     BuildingService,
     CacheService,
-    CampService,
-    EnemyService,
-    GuideService,
     MineService,
     ProgressService,
     ResourceService,
     RoutingService,
-    SectorService,
     SettingsService,
-    SoldierService,
-    SpecialistService,
     UserService,
 
     BackendService,

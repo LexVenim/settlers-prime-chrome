@@ -1,0 +1,132 @@
+<div class="camps" *ngIf="!progress.message && sectors && !zoomed">
+	<div class="side-menu">
+		<div class="avatar container">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
+					<img src="{{adventure.icon}}">
+				</div>
+				<div class="name center-content">
+					{{adventure.name}}
+				</div>
+			</div>
+		</div>
+		<div class="side-item container" *ngFor="let item of menu" (click)="go(item)">
+			<div class="background bc-primary o-75"></div>
+			<div class="content c-primary">
+				<div class="icon center-content">
+					<img src="{{item.icon}}">
+				</div>
+				<div class="text center-content">
+					{{item.name}}
+				</div>
+			</div>
+			<div class="locked font18 center-content" *ngIf="item.locked">
+				Locked
+			</div>
+		</div>
+		<div class="map container center-content" *ngIf="params.adventure != 'island' && params.adventure != 'archipelago'">
+			<div class="center-content">
+				<img src="{{adventure.info.map}}">
+			</div>
+			<div class="zoom container" (click)="toggleZoom()">
+				<div class="background bc-positive o-75"></div>
+				<div class="content c-secondary center-content">
+					<i class="fa fa-search-plus"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="info">
+		<div class="container top-header center-content c-secondary">
+			<div class="background bc-sky o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="../../assets/icons/tent.png">
+				</div>
+				<div class="name center-content">
+					Camps
+				</div>
+			</div>
+		</div>
+		<div class="list">
+			<div class="container camp custom center-content c-primary" *ngIf="params.parent">
+				<div class="background bc-primary o-75"></div>
+				<div class="content">
+					<div class="icon center-content">
+						<img src="../../assets/icons/swords.png">
+					</div>
+					<div class="name center-content">
+						Custom Battle
+					</div>
+					<div class="button container" (click)="selectCustom()">
+						<div class="background bc-negative o-75"></div>
+						<div class="center-content c-secondary">
+							Fight!
+						</div>
+					</div>
+				</div>						
+			</div>
+			<div *ngFor="let sector of sectors | sectorfilter: cs.camps">
+				<div>
+					<div class="container header center-content c-secondary">
+						<div class="background bc-secondary o-75"></div>
+						<div class="content">
+							<div class="icon center-content">
+								<img src="../../assets/icons/area.png">
+							</div>
+							<div class="name center-content">
+								Sector #{{sector.order}}
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<div *ngFor="let camp of cs.camps">
+							<div class="container camp center-content c-primary" *ngIf="camp.sector == sector.code">
+								<div class="background bc-primary o-75"></div>
+								<div class="content">
+									<div class="icon center-content">
+										<img src="../../assets/icons/tent.png">
+										{{camp.num}}
+									</div>
+									<div class="units center-content">
+										<div class="unit center-content" *ngFor="let unit of camp.enemies">	
+											<img src="{{unit.icon}}">
+											{{unit.amount}}
+										</div>
+									</div>
+									<div class="button container" (click)="selectCamp(camp)">
+										<div class="background bc-negative o-75"></div>
+										<div class="center-content c-secondary">
+											Fight!
+										</div>
+									</div>
+								</div>						
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="map map-big container center-content" *ngIf="!progress.message && sectors && zoomed">
+	<div class="wrapper">
+		<div>
+			<img src="{{adventure.info.map}}">
+		</div>
+	</div>
+	<div class="zoom container" (click)="toggleZoom()">
+		<div class="background bc-positive o-75"></div>
+		<div class="content c-secondary center-content">
+			<i class="fa fa-search-minus"></i>
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message || !sectors">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		Loading...
+	</div>
+</div>

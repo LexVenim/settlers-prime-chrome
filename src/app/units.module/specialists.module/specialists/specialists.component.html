@@ -1,0 +1,29 @@
+<div class="units" *ngIf="!progress.message && units">
+	<div class="list">
+		<div *ngFor="let unit of units">
+			<div class="container unit center-content c-primary" [ngClass]="{'locked': unit.code != general.code}" (click)="select(unit)">
+				<div class="background bc-primary o-75"></div>
+				<div class="content">
+					<div class="icon center-content">
+						<img src="{{unit.icon}}">
+					</div>
+					<div class="name center-content">
+						{{unit.name}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer container" (click)="next()">
+		<div class="background bc-positive o-75"></div>
+		<div class="content center-content c-secondary">
+			Next
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message || !units">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>

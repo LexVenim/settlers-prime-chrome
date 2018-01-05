@@ -1,0 +1,37 @@
+<div class="adventures" *ngIf="!progress.message && ads.adventures">
+	<div *ngFor="let category of ads.adventures">
+		<div class="container header center-content c-secondary">
+			<div class="background bc-secondary o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="../../assets/icons/torches.png">
+				</div>
+				<div class="name center-content">
+					{{category.name}}
+				</div>
+			</div>
+		</div>
+
+		<div class="list">
+			<div *ngFor="let adventure of category.adventures">
+				<div class="container adventure center-content c-primary" (click)="selectAdventure(adventure.code)">
+					<div class="background bc-primary o-75"></div>
+					<div class="content">
+						<div class="icon center-content">
+							<img src="{{adventure.icon}}">
+						</div>
+						<div class="name center-content">
+							{{adventure.name}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message || !ads.adventures">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>

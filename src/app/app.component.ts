@@ -24,7 +24,7 @@ export class AppComponent {
 	}
 
 	goTo(page){
-		this.router.go([page])
+		this.router.go(page)
 	}
 
 	home(){

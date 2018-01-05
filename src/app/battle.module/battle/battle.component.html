@@ -1,0 +1,79 @@
+<div class="battle" *ngIf="!progress.message">
+	<div class="container item center-content c-primary item-left">
+		<div class="background bc-primary o-75"></div>
+		<div class="content">
+			<div class="avatar">
+				<div class="icon center-content">
+					<img src="../../assets/icons/king.png">
+				</div>
+				<div class="name center-content">
+					{{user.name()}}
+				</div>
+			</div>
+			<div class="container">
+				<div class="side-item center-content">
+					<div class="icon center-content">
+						<img src="../../assets/icons/king.png">
+					</div>
+					<div class="name center-content">
+						Profile
+					</div>
+				</div>
+				<div class="locked font24 center-content">
+					Locked
+				</div>
+			</div>
+			<div class="container">
+				<div class="side-item side-item-empty center-content">
+					Select Adventure
+				</div>
+				<div class="locked font24 center-content">
+					Locked
+				</div>
+			</div>
+			<div class="container">
+				<div class="side-item side-item-empty center-content">
+					Select Guide
+				</div>
+				<div class="locked font24 center-content">
+					Locked
+				</div>
+			</div>
+			<div class="container">
+				<div class="side-item">
+					<div class="icon center-content">
+						<img src="../../assets/icons/horn.png">
+					</div>
+					<div class="name center-content">
+						Event
+					</div>
+				</div>
+				<div class="locked font24 center-content">
+					Locked
+				</div>
+			</div>
+		</div>
+	</div>
+	<div *ngFor="let item of menu">
+		<div class="container item center-content c-primary" (click)="select(item)">
+			<div class="background bc-primary o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="{{item.icon}}">
+				</div>
+				<div class="name center-content">
+					{{item.name}}
+				</div>
+			</div>
+			<div class="locked font30 center-content" *ngIf="item.lock">
+				Locked
+			</div>
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>
