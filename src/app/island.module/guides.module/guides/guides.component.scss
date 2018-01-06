@@ -29,7 +29,7 @@
       overflow: auto;
       max-height: 265px;
       .guide {
-        height: 100px;
+        height: 110px;
         width: 99%;
         margin: 10px 0;
         &:hover {
@@ -44,22 +44,29 @@
           .icon img {
             height: 50px;
           }
-          .units {
-            display: flex;
-            border-left: 1px dashed;
-            .unit {
-              margin: 0 2px;
-              font-size: 16px;
-              display: grid;
-              grid-template-rows: 3fr 1fr 1fr;
-              img {
-                height: 30px;
-              }
-              .amount {
-                height: 16px;
-              }
-              .icon {
-                height: 30px;
+          .guide-info {
+            display: grid;
+            .guide-name {
+              margin-top: 10px;
+              font-size: 20px;
+            }
+            .units {
+              display: flex;
+              border-left: 1px dashed;
+              .unit {
+                margin: 0 2px;
+                font-size: 16px;
+                display: grid;
+                grid-template-rows: 3fr 1fr 1fr;
+                img {
+                  height: 30px;
+                }
+                .amount {
+                  height: 16px;
+                }
+                .icon {
+                  height: 30px;
+                }
               }
             }
           }

@@ -57,19 +57,24 @@
 						<div class="icon center-content">
 							<img src="{{guide.generals[0].icon}}">
 						</div>
-						<div class="units center-content">
-							<div class="unit center-content c-positive" *ngFor="let u of guide.units">	
-								<div class="icon">
-									<img src="{{u.icon}}">
-								</div>
-								<div class="amount center-content">
-									{{u.amount}}
-								</div>
-								<div class="amount center-content c-negative" *ngFor="let c of guide.casualties | campfilter: u">
-									{{c.amount}}
+						<div class="guide-info">
+							<div class="guide-name center-content">
+								{{guide.name}}
+							</div>
+							<div class="units center-content">
+								<div class="unit center-content c-positive" *ngFor="let u of guide.units">	
+									<div class="icon">
+										<img src="{{u.icon}}">
+									</div>
+									<div class="amount center-content">
+										{{u.amount}}
+									</div>
+									<div class="amount center-content c-negative" *ngFor="let c of guide.casualties | campfilter: u">
+										{{c.amount}}
+									</div>
 								</div>
 							</div>
-						</div>			
+						</div>		
 					</div>
 				</div>
 			</div>
