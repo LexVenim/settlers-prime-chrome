@@ -53,6 +53,7 @@ export interface UserBuilding{
 	id?: string
 	buffed?: boolean
 	capacity?: any
+	code?: string
 	cost?: any
 	level: number
 	production?: any

@@ -4,8 +4,10 @@ import { FormsModule }                from '@angular/forms';
 
 import { SectorComponent }            from './sector/sector.component';
 import { SectorsComponent }           from './sectors/sectors.component';
+import { SectorMapComponent }         from './sector-map/sector-map.component';
 
 import { SectorsService }             from './sectors.service';
+import { SectorMapService }           from './sector.map.service';
 
 import { SectorsRoutesModule }        from './sectors.routes';
 
@@ -18,8 +20,12 @@ import { SectorsRoutesModule }        from './sectors.routes';
   ],
   declarations: [
     SectorComponent,
-    SectorsComponent
+    SectorsComponent,
+    SectorMapComponent
   ],
-  providers: [ SectorsService ]
+  providers: [
+    SectorsService,
+    SectorMapService
+  ]
 })
 export class SectorsModule {}

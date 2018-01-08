@@ -32,7 +32,7 @@ export class UserService {
     })
   }
 
-  clearUser(){
+  cleanUser(){
     this.user = null
     this.id = null
   }

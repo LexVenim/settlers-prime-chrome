@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BackendService, Mine } from './backend/backend.service';
 import { CacheService } from './cache.service';
-import { ResourceService } from './resource.service';
+import { ResourcesService } from '../resources.module/resources.service';
 
 @Injectable()
 export class MineService {
@@ -10,7 +10,7 @@ export class MineService {
 
 	constructor(private backend: BackendService,
 		private cache: CacheService,
-		private rs: ResourceService) {}
+		private rs: ResourcesService) {}
 
 	public loadCache(){
 		return new Promise((resolve, reject) => 

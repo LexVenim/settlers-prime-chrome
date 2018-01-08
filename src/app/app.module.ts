@@ -21,14 +21,10 @@ import { firebaseConfig } 						from './common/firebase.config';
 import { BackendService } from './services/backend/backend.service';
 import { AsyncHttpManager } from './services/backend/async_http.manager';
 
-
 import { AuthService } from './services/auth.service';
-import { BuffService } from './services/buff.service';
-import { BuildingService } from './services/building.service';
 import { CacheService } from './services/cache.service';
 import { MineService } from './services/mine.service';
 import { ProgressService } from './services/progress.service';
-import { ResourceService } from './services/resource.service';
 import { RoutingService } from './services/routing.service';
 import { SettingsService } from './services/settings.service';
 import { UserService } from './services/user.service';
@@ -38,10 +34,12 @@ import { UserService } from './services/user.service';
 import { AppRoutesModule } 						from './app.routes';
 
 import { BattleModule } 							from './battle.module/battle.module';
+import { BuffsModule }               from './buffs.module/buffs.module';
+import { BuildingsModule }            from './buildings.module/buildings.module';
 import { ColonyModule }               from './colony.module/colony.module';
-import { EconomyModule } 							from './economy.module/economy.module';
 import { IslandModule } 							from './island.module/island.module';
 import { ProfileModule } 							from './profile.module/profile.module';
+import { ResourcesModule }            from './resources.module/resources.module';
 import { UnitsModule }                from './units.module/units.module';
 
 import { AuthGuard } 							    from './common/auth.guard';
@@ -68,10 +66,12 @@ import { NotFoundComponent }          from './not-found/not-found.component';
     AngularFireAuthModule,
 
     BattleModule,
+    BuffsModule,
+    BuildingsModule,
     ColonyModule,
-    EconomyModule,
     IslandModule,
     ProfileModule,
+    ResourcesModule,
     UnitsModule,
 
     AppRoutesModule
@@ -79,12 +79,9 @@ import { NotFoundComponent }          from './not-found/not-found.component';
   providers: [
     AuthGuard, 
     AuthService,
-    BuffService,
-    BuildingService,
     CacheService,
     MineService,
     ProgressService,
-    ResourceService,
     RoutingService,
     SettingsService,
     UserService,

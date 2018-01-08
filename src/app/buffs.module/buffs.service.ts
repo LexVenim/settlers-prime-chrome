@@ -1,45 +1,36 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { BackendService, Buff } from './backend/backend.service';
-import { CacheService } from './cache.service';
+import { BackendService, Buff } from '../services/backend/backend.service';
 
-import { BuildingService } from './building.service';
-import { UserService } from './user.service';
+import { BuildingsService } from '../buildings.module/buildings.service';
+import { UserService }           from '../services/user.service';
 
 @Injectable()
-export class BuffService {
-  buffs
+export class BuffsService {
+  buffs = []
+  buff
+  userBuffs = []
 
-  constructor(public db: AngularFireDatabase,
-    private backend: BackendService,
-    private cache: CacheService,
+  constructor(private db: AngularFireDatabase,
+              private backend: BackendService,
 
-    public bs: BuildingService,
-    private user: UserService) {}
+              private bs: BuildingsService,
+              private user: UserService) {}
 
-  public load(buffs = null){
+  public load(cachedBuffs = null){
     this.buffs = []
-
     return new Promise((resolve, reject) => {
-      if(!buffs)
+      if(!cachedBuffs)
         this.backend.getItems('buffs').then((buffs: Array<Buff>) => {
-          this.cache.set('settlersprime-buffs', buffs)
-          this.buffs = buffs.map(b => {b.list = []; return b})
+          this.buffs = buffs
           resolve()
         })
       else {
-        this.buffs = buffs.map(b => {b.list = []; return b})
-        console.log(this.buffs.filter(b => b.category == 'production'))
+        this.buffs = cachedBuffs
         resolve()
       }
     })
-  }
-
-  public loadCache(){
-    return new Promise((resolve, reject) => 
-      this.cache.get('settlersprime-buffs').then(buffs => 
-        this.load(buffs).then(() => resolve())))
   }
 
   public loadUser(){
@@ -50,28 +41,31 @@ export class BuffService {
       switch (event.type) {
         case "child_added":
           if(this.checkTime(data.endtime)){
-            i = this.buffs.findIndex(b => b.code == data.code)
-            this.buffs[i].list.push({building: event.payload.key, endtime: data.endtime})
+            this.userBuffs.push({building: event.payload.key, code:data.code, endtime: data.endtime})
+
+            i = this.buffs.findIndex(b => b.code == data.code)        
             this.bs.setModifier(data.building, event.payload.key, this.buffs[i].x)
           }
           else
             this.remove(event.payload.key)
           break;
-        
+
         case "child_removed":
           i = this.buffs.findIndex(b => b.code == data.code)
-          this.buffs[i].list = this.buffs[i].list.filter(b => b.building != event.payload.key)
           this.bs.removeModifier(data.building, event.payload.key, this.buffs[i].x)
+
+          let ubi = this.userBuffs.findIndex(b => b.building == event.payload.key)
+          this.userBuffs.splice(ubi)
           break;   
-        
+
         default:
           break;
-        }
-      })
+      }
+    })
   }
 
-  public clearUser(){
-    this.loadCache()
+  public cleanUser(){
+    this.userBuffs = []
   }
 
   // CRUD

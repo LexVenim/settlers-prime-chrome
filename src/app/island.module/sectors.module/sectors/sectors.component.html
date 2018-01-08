@@ -1,6 +1,26 @@
-<div class="loading container" *ngIf="progress.message || !ss.sectors">
-	<div class="bc-primary o-75"></div>
-	<div class="center-content c-primary">
-		{{progress.message}}
+<div class="sectors container">
+	<div class="map" *ngIf="!progress.message && menu">
+		<img src="../../assets/map.jpeg">
+	</div>
+	<div class="island" *ngIf="!progress.message && menu">
+		<div *ngFor="let sector of menu" [ngStyle]="{'grid-column': sector.col, 'grid-row': sector.row}">
+			<div class="container item center-content c-primary" (click)="select(sector.code)">
+				<div class="background bc-primary o-75"></div>
+				<div class="content">
+					<div class="icon center-content" [ngClass]="{'small': sector.small}">
+						<img src="../../assets/icons/area.png">
+					</div>
+					<div class="name center-content">
+						{{sector.name}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="loading container" *ngIf="progress.message || !menu">
+		<div class="bc-primary o-75"></div>
+		<div class="center-content c-primary">
+			{{progress.message}}
+		</div>
 	</div>
 </div>

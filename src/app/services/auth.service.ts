@@ -9,11 +9,11 @@ import { CacheService } from './cache.service';
 import { ProgressService } from './progress.service';
 import { RoutingService } from './routing.service';
 
-import { BuffService } from './buff.service';
-import { BuildingService } from './building.service';
-import { ResourceService } from './resource.service';
 import { UserService } from './user.service';
 
+import { BuffsService } from '../buffs.module/buffs.service';
+import { BuildingsService } from '../buildings.module/buildings.service';
+import { ResourcesService } from '../resources.module/resources.service';
 import { SectorsService }   from '../island.module/sectors.module/sectors.service';
 
 @Injectable()
@@ -24,20 +24,19 @@ export class AuthService {
   private wasLogged
   private authChecked = false
 
-  constructor(public progress: ProgressService,
-
-    private af: AngularFireAuth,
-    private backend: BackendService,
-    private cache: CacheService,
-    private router: RoutingService,
-    
-    private bfs: BuffService,
-    private bs: BuildingService,
-    private rs: ResourceService,
-    private ss: SectorsService,
-    private us: UserService) 
+  constructor(private progress: ProgressService,
+              private af: AngularFireAuth,
+              private backend: BackendService,
+              private cache: CacheService,
+              private router: RoutingService,
+              
+              private bfs: BuffsService,
+              private bs: BuildingsService,
+              private rs: ResourcesService,
+              private ss: SectorsService,
+              private us: UserService) 
   {
-    let spVersion = '3.0.5'
+    let spVersion = '3.1.0'
 
     this.progress.set("Loading...")
 
@@ -120,12 +119,14 @@ export class AuthService {
   }
 
   logout() {
+    this.bfs.cleanUser()
+    this.cache.get("settlersprime-resources").then((resources: Array<any>) => this.rs.cleanUser())
 
-    this.us.clearUser()
-    // this.bs.clearUser()
-    // this.bfs.clearUser()
-    // this.rs.clearUser()
-    // this.ss.clearUser()
+    this.bs.cleanUser()  
+    
+    this.ss.cleanUser()
+
+    this.us.cleanUser()
 
     this.router.home()
     return this.af.auth.signOut()
@@ -165,10 +166,19 @@ export class AuthService {
       this.progress.set("Going through papers..")
       this.us.load(id).then(res => {
 
-        // this.bs.loadUser()
-        // this.bfs.loadUser()
-        // this.rs.loadUser()
-        // this.ss.loadUser()
+        this.ss.loadUser() 
+
+        this.cache.get("settlersprime-buildings").then((buildings: Array<any>) =>
+          this.bs.load(buildings).then(() => 
+            this.bs.loadUser()))
+
+        this.cache.get("settlersprime-buffs").then((buffs: Array<any>) =>
+          this.bfs.load(buffs).then(() => 
+            this.bfs.loadUser()))
+        
+        this.cache.get("settlersprime-resources").then((resources: Array<any>) =>
+          this.rs.load(resources).then(() => 
+            this.rs.loadUser()))
 
         this.progress.set("Taking over the world...")
         resolve()

@@ -6,7 +6,6 @@ import { ResourcesComponent }       from './resources/resources.component';
 import { ResourceTradeComponent }   from './resource-trade/resource-trade.component'; 
 
 const routes: Routes = [
-	{ path: 'economy', component: ResourcesComponent },
   { path: 'resources',  component: ResourcesComponent },
   { path: 'resources/:id', component: ResourceComponent },
   { path: 'resources/:id/trade', component: ResourceTradeComponent }
@@ -20,4 +19,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class EconomyRoutesModule { }
+export class ResourcesRoutesModule { }

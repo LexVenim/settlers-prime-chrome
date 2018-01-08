@@ -4,27 +4,30 @@ import { AngularFireDatabase }      from 'angularfire2/database';
 import { BackendService, Sector }   from '../../services/backend/backend.service';
 
 import { CampsService }             from '../camps.module/camps.service';
+import { UserService }              from '../../services/user.service';
 
 @Injectable()
 export class SectorsService {
   sectors = []
   sector
+  userSectors = []
 
   constructor(private backend: BackendService,
               private db: AngularFireDatabase,
 
-              public cs: CampsService) {}
+              private cs: CampsService,
+              private user: UserService) {}
    
 
   public createUser(){
     return new Promise((resolve, reject) => { 
       this.backend.getItems('sectors', {adventure: 'island'}).then((isectors: any) => {
         this.backend.getItems('sectors', {adventure: 'archipelago'}).then((asectors: any) => {
-          let userSectors = isectors.concat(asectors)
+          this.userSectors = isectors.concat(asectors)
 
-          this.cs.loadAdventureCamps(userSectors).then(() => {
+          this.cs.loadAdventureCamps(this.userSectors).then(() => {
             let newSectors = {}
-            userSectors.forEach(s => {
+            this.userSectors.forEach(s => {
               newSectors[s.code] = {
                 camps: this.cs.camps.filter(c => c.sector == s.code).map(c => c.code),
                 locked: s.code == "i1" ? false : true
@@ -38,36 +41,6 @@ export class SectorsService {
     })
   }
 
-  // public load(sectors = null){
-  //   this.sectors = []
-
-  //   return new Promise((resolve, reject) => {
-  //     if(!sectors)
-  //       this.backend.getItems('sectors', {adventure: 'island'}).then((isectors: Array<Sector>) => {
-  //         this.backend.getItems('sectors', {adventure: 'archipelago'}).then((asectors: Array<Sector>) => {
-  //           let s = isectors.concat(asectors)
-  //           this.sectors = s.sort((a,b) => a.order - b.order)
-
-  //           let promises = []
-  //           s.forEach(sc => {
-  //             promises.push(this.cs.loadSector(sc.code))
-  //             // promises.push(this.ms.loadSector(sc.code))
-  //           })
-
-  //           Promise.all(promises).then(() => {
-  //             resolve()
-  //           })
-  //         })
-  //       })
-  //     else {
-  //       this.sectors = sectors.sort((a,b) => a.order - b.order)
-  //       this.cs.loadCache()
-  //       // this.ms.loadCache()
-  //       resolve()
-  //     }
-  //   })
-  // }
-
   public getAdventureSectors(adventure){
     return new Promise((resolve, reject) => {
       this.backend.getItems("sectors", {adventure: adventure}).then((sectors: Array<Sector>) => 
@@ -75,48 +48,48 @@ export class SectorsService {
     })
   }
 
-  // public loadUser(){
-  //   this.db.list('/users/' + this.user.id + '/sectors').stateChanges().subscribe(event => {
-  //     let data = event.payload.val()
-  //     let i
+  public clean(){
+    this.sector = undefined
+  }
 
-  //     switch (event.type) {
-  //       case "child_added":
-  //         i = this.sectors.findIndex(s => s.code == event.payload.key)
-  //         this.sectors[i].camps = data.camps
-  //         this.sectors[i].locked = data.locked
-  //         break;
+  public loadUser(){
+    this.createUser().then((sectors : Array<any>) => {
+      this.db.list('/users/' + this.user.id + '/sectors').stateChanges().subscribe(event => {
+        let data = event.payload.val()
+        let i
 
-  //       case "child_changed":
-  //         i = this.sectors.findIndex(s => s.code == event.payload.key)
-  //         this.sectors[i].camps = data.camps
-  //         this.sectors[i].locked = data.locked
-  //         break;
-        
-  //       default:
-  //         break;
-  //       }
-  //     })
-  // }
+        switch (event.type) {
+          case "child_added":
+            i = this.userSectors.findIndex(s => s.code == event.payload.key)
+            this.userSectors[i].camps = data.camps
+            this.userSectors[i].locked = data.locked
+            break;
 
-  // public clearUser(){
-  //   this.loadCache()
-  // }
+          case "child_changed":
+            i = this.sectors.findIndex(s => s.code == event.payload.key)
+            this.userSectors[i].camps = data.camps
+            this.userSectors[i].locked = data.locked
+            break;
 
-  // public unlock(sCode){
-  //   return new Promise((resolve, reject) => {
-  //     let data = { locked: false, camps: null }    
-  //     this.db.list('/users/' + this.user.id + '/sectors').update(sCode, data).then(() => resolve())
-  //   })
-  // }
+          default:
+            break;
+        }
+      })
+    })  
+  }
 
-  // public updateCamps(scode, camps){
-  //   this.db.object('/users/' + this.user.id + '/sectors/' + scode + '/camps').set(camps)
-  // }
+  public cleanUser(){
+    this.userSectors = []
+  }
 
-  // public select(sCode){
-  //   this.sector = this.sectors.find(s => s.code == sCode)
-  //   if(!this.user.id)
-  //     this.sector.locked = false
-  // }
+  public unlock(sCode){
+    return new Promise((resolve, reject) => {
+      let data = { locked: false, camps: null }    
+      this.db.list('/users/' + this.user.id + '/sectors').update(sCode, data).then(() => resolve())
+    })
+  }
+
+  public updateCamps(scode, camps){
+    this.db.object('/users/' + this.user.id + '/sectors/' + scode + '/camps').set(camps)
+  }
 }

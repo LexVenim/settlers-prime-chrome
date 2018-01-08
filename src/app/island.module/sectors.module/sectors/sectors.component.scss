@@ -1,0 +1,38 @@
+.sectors {
+  height: 100%;
+
+  .island {
+    height: 97%;
+    width: 98%;
+    margin: 1%;
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    grid-gap: 5px;
+    font-family: Breakable;
+    opacity: 0.8;
+
+    .item {
+      height: 100%;
+      > div {
+        border-radius: 10px;
+      }
+      .content {
+        display: grid;
+        grid-template-rows: 5fr 2fr;
+        font-size: 20px;
+        .icon img {
+          height: 50px;
+        }
+        .icon.small img {
+          height: 30px;
+        }
+      }
+    }
+  }
+
+  .map img{
+    height: 320px;
+    width: 500px;
+  }
+}

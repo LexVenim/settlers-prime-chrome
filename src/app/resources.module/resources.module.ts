@@ -6,22 +6,22 @@ import { ResourceComponent }        from './resource/resource.component';
 import { ResourcesComponent }       from './resources/resources.component';
 import { ResourceTradeComponent }   from './resource-trade/resource-trade.component';
  
-import { EconomyService }           from './economy.service';
+import { ResourcesService }         from './resources.service';
 
-import { EconomyRoutesModule }      from './economy.routes';
+import { ResourcesRoutesModule }    from './resources.routes';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
 
-    EconomyRoutesModule
+    ResourcesRoutesModule
   ],
   declarations: [
     ResourceComponent,
     ResourcesComponent,
     ResourceTradeComponent
   ],
-  providers: [ EconomyService ]
+  providers: [ ResourcesService ]
 })
-export class EconomyModule {}
+export class ResourcesModule {}

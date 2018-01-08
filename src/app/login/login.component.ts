@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 			this.progress.set("Obtaining land deed...")
 			this.af.signup(f.value.email, f.value.password).catch((error) => 
 				this.af.login(f.value.email, f.value.password).catch((error:any) => {
-					this.af.progress = null
+					this.progress.unset()
 					console.log(error)
 				}))
 		}
