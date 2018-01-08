@@ -56,7 +56,7 @@ export class SectorsComponent implements OnInit {
 
   select(sector){
     this.ss.sector = sector
-    this.router.go('sectors', sector)
+    this.router.go('sectors', sector, "map")
   }
 
   toggleIsland(){

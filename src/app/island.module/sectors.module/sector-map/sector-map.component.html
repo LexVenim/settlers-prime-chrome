@@ -1,0 +1,19 @@
+<div class="island container" *ngIf="!progress.message && map">
+	<div>
+		<img src="{{map.image.src}}" alt="" usemap="#Map" />
+		<map name="Map" id="Map">
+			<div *ngFor="let coord of map.coords">
+				<area alt="" title="{{coord}}" shape="poly" coords="{{coord}}" (click)="drawPoly(coord)"/>
+			</div>
+		</map>
+	</div>
+	<div class="canvas">
+		<canvas #myCanvas width="{{map.image.width}}" height="{{map.image.height}}"></canvas>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message || !map">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>

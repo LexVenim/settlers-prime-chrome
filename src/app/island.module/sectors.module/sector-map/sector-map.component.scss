@@ -1,0 +1,9 @@
+.island {
+  overflow: auto;
+  font-family: Breakable;
+  height: 320px;
+  .canvas {
+    pointer-events: none
+  }
+}
+

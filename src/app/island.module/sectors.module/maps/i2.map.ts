@@ -1,3 +1,9 @@
+export const image = {
+	src: "../../assets/maps/i2.map.jpeg",
+	height: 1489,
+	width: 2802
+}
+
 export const coords : any = [
 "49,66,108,102,167,66,108,30",
 "167,66,226,102,285,66,226,30",
