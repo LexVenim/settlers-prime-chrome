@@ -1,3 +1,172 @@
-<p>
-  sector works!
-</p>
+<div class="sector" *ngIf="!progress.message && ss.sector">
+	<div class="sector-header container">
+		<div class="bc-primary o-75"></div>
+		<div class="content center-content c-primary">
+			<div class="name center-content">
+				{{ss.userSectors[ss.sector].name}}
+			</div>
+			<div class="mines" *ngIf="!ss.userSectors[ss.sector].locked">
+			<!-- 	<div *ngFor="let mine of ms.mines">
+					<div class="mine center-content" *ngIf="mine.sectorList[ss.sector.code]">	
+						<img src="{{mine.resource.icon}}">
+						0 / {{mine.sectorList[ss.sector.code]}}
+					</div>
+				</div> -->
+			</div>
+			<div class="sector-locked container" *ngIf="ss.userSectors[ss.sector].locked" (click)="unlock()">
+				<div class="bc-negative o-75"></div>
+				<div class="content center-content c-primary">
+					<div class="icon center-content">
+						<img src="../../assets/icons/key.png">
+					</div>
+					<div class="name left-content">
+						Unlock
+					</div>
+				</div>
+			</div>
+			<div class="map container" (click)="showMap()">
+				<div class="bc-negative o-75"></div>
+				<div class="content center-content c-primary">
+					<div class="icon center-content">
+						<img src="../../assets/icons/area.png">
+					</div>
+					<div class="name left-content">
+						Map
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="buildings" *ngIf="!ss.userSectors[ss.sector].locked && !showAvailable && !showBuffs">
+		<div class="building-type" *ngFor="let bt of bs.buildings | btfilter: params.id">
+			<div class="header container center-content c-secondary" >
+				<div class="bc-secondary o-75"></div>
+				<div class="content">
+					<div class="icon center-content">
+						<img src="{{bt.icon}}">
+					</div>
+					<div class="name left-content">
+						{{bt.name}}
+					</div>
+				</div>
+			</div>
+
+			<div class="building container c-primary" *ngFor="let building of bs.userBuildings | buildingsfilter: params.id : bt.code">
+				<div class="bc-primary o-75"></div>
+				<div class="content">
+					<div class="icon center-content">
+						<img src="../../assets/icons/star.png" >
+						{{building.level}}
+					</div>
+					<div class="icon center-content" *ngIf="building.production">
+						<img src="{{res.icon}}" *ngFor="let res of rs.resources | resourcesfilter: building.production.out[0].code">
+						{{building.production.out[0].per12h}} per 12h
+					</div>
+					<div class="icon center-content" *ngIf="building.storage">
+						<img src="../../assets/icons/silo.png">
+						{{building.storage}}
+					</div>
+					<div class="icon center-content" *ngIf="!building.storage && !building.production">
+						<img src="../../assets/icons/star.png">
+						Special
+					</div>
+					<div class="button button-upgrade center-content" (click)="upgrade(building.id, building.level)" *ngIf="building.cost.upgrade">
+						<i class="fa fa-arrow-circle-o-up"></i>
+					</div>
+					<div class="button button-buff center-content" (click)="openBuffsMenu(bt.code, building.id)" *ngIf="bt.abilities.buffable && !building.buffed">
+						<i class="fa fa-certificate"></i>
+					</div>
+					<div class="button button-buff center-content" (click)="removeBuff(building.id)" *ngIf="bt.abilities.buffable && building.buffed">
+						<i class="fa fa-times"></i>
+					</div>
+					<div class="button button-destroy center-content" (click)="destroy(building.id)" *ngIf="bt.abilities.destroyable">
+						<i class="fa fa-times-circle-o"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="building-add container" *ngIf="!ss.userSectors[ss.sector].locked && !showAvailable && !showBuffs" (click)="showAvailableBuildings()">
+		<div class="bc-ternary o-75"></div>
+		<div class="center-content c-secondary">
+			Add Building
+		</div>
+	</div>
+
+	<div class="buildings-available" *ngIf="!ss.userSectors[ss.sector].locked && showAvailable">
+		<div class="building-back container c-secondary" (click)="hideAvailableBuildings()">
+			<div class="bc-secondary o-75"></div>
+			<div class="content center-content">
+				<div class="icon center-content">
+					<i class="fa fa-arrow-left"></i>
+				</div>
+				<div class="gname center-content">
+					Back
+				</div>
+			</div>
+		</div>
+
+		<div class="building container c-primary" *ngFor="let building of bs.buildings | availablefilter: params.id" (click)="addBuilding(building.code)">
+			<div class="bc-primary o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="{{building.icon}}">
+				</div>
+				<div class="name center-content">
+					{{building.name}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="buffs" *ngIf="!ss.userSectors[ss.sector].locked && showBuffs">
+		<div class="buff buff-back container c-secondary" (click)="hideBuffs()">
+			<div class="bc-secondary o-75"></div>
+			<div class="content center-content">
+				<div class="icon center-content">
+					<i class="fa fa-arrow-left"></i>
+				</div>
+				<div class="gname center-content">
+					Back
+				</div>
+			</div>
+		</div>
+
+		<div class="buff container c-primary" *ngFor="let buff of bfs.buffs | bufffilter: buffBuilding.code" (click)="applyBuff(buff.code)">
+			<div class="bc-primary o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="{{buff.icon}}">
+				</div>
+				<div class="name center-content">
+					{{buff.name}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="camps" *ngIf="ss.userSectors[ss.sector].locked">
+		<div class="container camp c-primary"  *ngFor="let camp of cs.camps | campfilter: params.id">
+			<div class="bc-primary o-75"></div>
+			<div class="content">
+				<div class="icon center-content">
+					<img src="../../assets/icons/tent.png">
+				</div>
+				<div class="units center-content">
+					<div class="unit center-content" *ngFor="let unit of camp.enemies">	
+						<img src="{{unit.icon}}">
+						{{unit.amount}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="loading container" *ngIf="progress.message || !ss.sector">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message}}
+	</div>
+</div>

@@ -124,12 +124,12 @@ export class BuildingsService {
 
   public setModifier(bcode, bid, x){
     let bti = this.userBuildings.findIndex(bt => bt.code == bcode)
-    let i = this.userBuildings[bti].list.findIndex(b => b.id == bid)
+    let i = this.userBuildings.findIndex(b => b.id == bid)
     if(i != -1){
-      if(this.userBuildings[bti].list[i].production)
-        this.userBuildings[bti].list[i].production.out[0].per12h *= x
-      this.userBuildings[bti].list[i].buffed = true
-      this.buildingsSubject.next(this.userBuildings[bti].list[i])
+      if(this.userBuildings[i].production)
+        this.userBuildings[i].production.out[0].per12h *= x
+      this.userBuildings[i].buffed = true
+      this.buildingsSubject.next(this.userBuildings[i])
     }
     else
       this.buildingModifiers[bid] ? this.buildingModifiers[bid] *= x : this.buildingModifiers[bid] = x
@@ -137,12 +137,12 @@ export class BuildingsService {
 
   public removeModifier(bcode, bid, x){
     let bti = this.userBuildings.findIndex(bt => bt.code == bcode)
-    let i = this.userBuildings[bti].list.findIndex(b => b.id == bid)
+    let i = this.userBuildings.findIndex(b => b.id == bid)
     if(i != -1){
-      if(this.userBuildings[bti].list[i].production)
-        this.userBuildings[bti].list[i].production.out[0].per12h /= x
-      this.userBuildings[bti].list[i].buffed = false
-      this.buildingsSubject.next(this.userBuildings[bti].list[i])
+      if(this.userBuildings[i].production)
+        this.userBuildings[i].production.out[0].per12h /= x
+      this.userBuildings[i].buffed = false
+      this.buildingsSubject.next(this.userBuildings[i])
     }
     else if(this.buildingModifiers[bid])
       this.buildingModifiers[bid] == x ? delete this.buildingModifiers[bid] : this.buildingModifiers[bid] /= x

@@ -67,10 +67,16 @@ export class ResourcesService {
   	})
   }
 
+  private deepClone(obj){
+    return JSON.parse(JSON.stringify(obj))
+  }
+
   private updateResource(rCode){
   	let inBuildings = this.bs.userBuildings.filter(b => b.production && b.production.in && b.production.in.findIndex(r => r.code == rCode) != -1)
-  	if(inBuildings.length > 0) {
-  		inBuildings = inBuildings
+  	
+
+    if(inBuildings.length > 0) {
+  		inBuildings = this.deepClone(inBuildings)
   		.sort((a,b) => (a.code == b.code) ? a.level - b.level : ((a.code < b.code) ? -1 : 1))
   		.map(b => {
   			b.production = b.production.in.find(r => r.code = rCode).per12h
@@ -82,7 +88,7 @@ export class ResourcesService {
 
   	let outBuildings = this.bs.userBuildings.filter(b => b.production && b.production.out && b.production.out.findIndex(r => r.code == rCode) != -1)
   	if(outBuildings.length > 0) {
-  		outBuildings = outBuildings
+  		outBuildings = this.deepClone(outBuildings)
   		.sort((a,b) => (a.code == b.code) ? a.level - b.level : ((a.code < b.code) ? -1 : 1))
   		.map(b => {
   			b.production = b.production.out[0].per12h

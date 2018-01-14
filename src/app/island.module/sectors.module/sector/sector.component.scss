@@ -1,0 +1,127 @@
+.sector {
+  display: grid;
+  grid-template-rows: 1fr 7fr;
+  grid-gap: 5px;
+  height: 97%;
+  width: 98%;
+  margin: 1%;
+  font-family: Breakable;
+  opacity: 0.8;
+
+  .buffs {
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-gap: 5px;
+    .buff {
+      height: 80px;
+    }
+  }
+
+  .buildings {
+    overflow: auto;
+    width: 96%;
+    margin-left: 2%;
+    .building-type {
+      margin: 5px 0;
+      .building {
+        height: 30px;
+        .content {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          font-size: 16px;
+          .button {
+
+          }
+          .button.button-buff {
+            grid-column: 4;
+          }
+          .button.button-destroy {
+            grid-column: 5;
+          }
+          .button.button-upgrade {
+            grid-column: 3;
+          }
+          .icon img{
+            height: 30px;
+          }
+        }
+      }
+      .header {
+        height: 30px;
+        font-size: 18px;
+        .content {
+          display: grid;
+          grid-template-columns: 2fr 6fr;
+          .icon img {
+            height: 24px;
+          }
+          .name {
+
+          }
+        }
+      }
+    }
+    
+  }
+
+  .building-add{
+    height: 30px;
+    > div {
+      border-radius: 5px;
+    }
+  }
+
+  .camps {
+    overflow: auto;
+    width: 96%;
+    margin-left: 2%;
+    .camp {
+      height: 30px;
+      margin: 5px 0;
+      > div {
+        border-radius: 5px;
+      }
+      .content {
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        .icon img{
+          height: 30px;
+        }
+        .units {
+          display: flex;
+          .unit {
+            margin: 0 1px;
+            font-size: 16px;
+            img {
+              height: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sector-header {
+    > div {
+      border-radius: 5px;
+    }
+    .content {
+      font-size: 22px;
+      display: grid;
+      grid-template-columns: 3fr 3fr 2fr;
+      .map,
+      .sector-locked {
+        height: 100%;
+        img {
+          height: 30px;
+        }
+      }
+      .mines {
+        height: 100%;
+      }
+      .name {
+
+      }
+    }
+  }
+}

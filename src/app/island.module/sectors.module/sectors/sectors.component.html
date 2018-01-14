@@ -1,8 +1,8 @@
-<div class="sectors container">
-	<div class="map" *ngIf="!progress.message && menu">
+<div class="sectors container" *ngIf="!progress.message && ss.userSectors.length > 0">
+	<div class="map">
 		<img src="../../assets/map.jpeg">
 	</div>
-	<div class="island" *ngIf="!progress.message && menu">
+	<div class="island">
 		<div *ngFor="let sector of menu" [ngStyle]="{'grid-column': sector.col, 'grid-row': sector.row}">
 			<div class="container item center-content c-primary" (click)="select(sector.code)">
 				<div class="background bc-primary o-75"></div>
@@ -17,10 +17,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="loading container" *ngIf="progress.message || !menu">
-		<div class="bc-primary o-75"></div>
-		<div class="center-content c-primary">
-			{{progress.message}}
-		</div>
+</div>
+<div class="loading container" *ngIf="progress.message || ss.userSectors.length == 0">
+	<div class="bc-primary o-75"></div>
+	<div class="center-content c-primary">
+		{{progress.message || "Loading"}}
 	</div>
 </div>

@@ -11,6 +11,14 @@ import { SectorMapService }           from './sector.map.service';
 
 import { SectorsRoutesModule }        from './sectors.routes';
 
+import { AvailableFilterPipe }               from './pipes/available.filter.pipe';
+import { BtFilterPipe }               from './pipes/bt.filter.pipe';
+import { BuffFilterPipe }               from './pipes/buff.filter.pipe';
+import { BuildingsFilterPipe }        from './pipes/buildings.filter.pipe';
+import { CampFilterPipe }               from './pipes/camp.filter.pipe';
+import { ResourcesFilterPipe }        from './pipes/resources.filter.pipe';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +29,14 @@ import { SectorsRoutesModule }        from './sectors.routes';
   declarations: [
     SectorComponent,
     SectorsComponent,
-    SectorMapComponent
+    SectorMapComponent,
+
+    AvailableFilterPipe,
+    BtFilterPipe,
+    BuffFilterPipe,
+    BuildingsFilterPipe,
+    CampFilterPipe,
+    ResourcesFilterPipe
   ],
   providers: [
     SectorsService,

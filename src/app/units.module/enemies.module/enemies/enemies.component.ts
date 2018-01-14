@@ -35,6 +35,8 @@ export class EnemiesComponent implements OnInit {
 						this.router.go(this.params.pass, {adventure: this.params.adventure});	break;
 					case "guide":
 						this.router.pass("camps", this.params);	break;
+					case "sector":
+						this.router.go("sectors", this.params.sector);	break;
 					default:
 						this.router.go(this.params.pass, {adventure: this.params.adventure});	break;
 				}		

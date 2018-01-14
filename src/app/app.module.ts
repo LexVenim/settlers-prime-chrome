@@ -23,7 +23,6 @@ import { AsyncHttpManager } from './services/backend/async_http.manager';
 
 import { AuthService } from './services/auth.service';
 import { CacheService } from './services/cache.service';
-import { MineService } from './services/mine.service';
 import { ProgressService } from './services/progress.service';
 import { RoutingService } from './services/routing.service';
 import { SettingsService } from './services/settings.service';
@@ -80,7 +79,6 @@ import { NotFoundComponent }          from './not-found/not-found.component';
     AuthGuard, 
     AuthService,
     CacheService,
-    MineService,
     ProgressService,
     RoutingService,
     SettingsService,

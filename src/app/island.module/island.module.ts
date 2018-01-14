@@ -5,6 +5,7 @@ import { FormsModule }              from '@angular/forms';
 import { AdventuresModule }         from './adventures.module/adventures.module';
 import { CampsModule }              from './camps.module/camps.module';
 import { GuidesModule }             from './guides.module/guides.module';
+import { MinesModule }              from './mines.module/mines.module';
 import { SectorsModule }            from './sectors.module/sectors.module';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { SectorsModule }            from './sectors.module/sectors.module';
     AdventuresModule,
     CampsModule,
     GuidesModule,
+    MinesModule,
     SectorsModule
   ],
   declarations: [],
